@@ -2,7 +2,7 @@ import { z } from "zod";
 
 import schemas from "../schemas/transactions.schemas";
 
-type TTransactionResponse = z.infer<typeof schemas.transactions>;
+type TTransactionResponse = z.infer<typeof schemas.response>;
 
 type TTransactionRequest = z.infer<typeof schemas.request>;
 

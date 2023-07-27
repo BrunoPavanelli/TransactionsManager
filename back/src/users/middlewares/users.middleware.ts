@@ -45,20 +45,21 @@ class UsersMiddlewares {
 	): Promise<void | Response> {
 		const { cpf } = req.body;
 		const method = req.method;
+		const path = req.originalUrl;
 
 		const userFind = await this.usersRepositories.findByCpf(cpf);
-		if (method === "GET") {
-			if (!userFind)
-				return res.status(404).json({ message: "User not Found!" });
-		}
 
-		if (method === "POST") {
-			if (userFind)
-				return res
-					.status(409)
-					.json({ message: "CPF already registered" });
+		if (path === "/transactions" && method === "POST") {
+			if (!userFind) return res.status(404).json({ message: "User not Found!" });			
+		} else {
+			if (method === "GET") {
+				if (!userFind) return res.status(404).json({ message: "User not Found!" });
+			}
+	
+			if (method === "POST") {
+				if (userFind) return res.status(409).json({ message: "CPF already registered" });
+			}
 		}
-
 		next();
 	}
 
@@ -140,8 +141,7 @@ class UsersMiddlewares {
 	): Response | void {
 		const role = res.locals.tokenData.role;
 
-		if (role !== "admin")
-			return res.status(403).json({ message: "Unauthorized" });
+		if (role !== "admin") return res.status(403).json({ message: "Unauthorized" });
 
 		return next();
 	}

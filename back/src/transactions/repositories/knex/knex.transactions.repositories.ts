@@ -1,6 +1,6 @@
 import database from "../../../database/database";
 import {
-	TTransactionRequest,
+	TTransactionCreateInDb,
 	TTransactionResponse,
 	TTrasactionUpdate,
 } from "../../interfaces/transactions.interfaces";
@@ -8,13 +8,11 @@ import { TransactionsRepositories } from "../transactions.repositories";
 
 export class KnexTransactionRepositories implements TransactionsRepositories {
 	async create(
-		transactionData: TTransactionRequest
+		transactionData: TTransactionCreateInDb
 	): Promise<TTransactionResponse> {
 		const newTransaction = await database("transactions").insert({
 			...transactionData,
 		});
-
-		// await database("transactions").insert({"user_id": userId})
 
 		const transactionResponse: TTransactionResponse = await database(
 			"transactions"

@@ -7,6 +7,7 @@ import {
 import {
 	TTransactionCreateInDb,
 	TTransactionRequest,
+	TTransactionResponse,
 	TTrasactionUpdate,
 } from "../interfaces/transactions.interfaces";
 
@@ -21,20 +22,18 @@ class TransactionsController {
 	}
 
 	async create(req: Request, res: Response): Promise<Response> {
-		const userId = parseInt(res.locals.userId);
 		const transactionData: TTransactionRequest = req.body;
 
 		const newTransaction: TTransactionCreateInDb =
             await this.transactionsServices.create({
             	...transactionData,
-            	user_id: userId,
             });
 
 		return res.status(201).json(newTransaction);
 	}
 
 	async findAll(req: Request, res: Response): Promise<Response> {
-		const transactions: TTransactionRequest[] =
+		const transactions: TTransactionResponse[] =
             await this.transactionsServices.findAll();
 
 		return res.json(transactions);
@@ -42,7 +41,7 @@ class TransactionsController {
 
 	async findByCpfUser(req: Request, res: Response): Promise<Response> {
 		const { cpf } = req.body;
-		const transactions: TTransactionRequest[] =
+		const transactions: TTransactionResponse[] =
             await this.transactionsServices.findByCpfUser(cpf);
 
 		return res.json(transactions);
@@ -50,7 +49,7 @@ class TransactionsController {
 
 	async findByToken(req: Request, res: Response): Promise<Response> {
 		const { cpf } = res.locals.tokenData;
-		const transactions: TTransactionRequest[] =
+		const transactions: TTransactionResponse[] =
             await this.transactionsServices.findByCpfUser(cpf);
 
 		return res.json(transactions);
@@ -59,7 +58,7 @@ class TransactionsController {
 	async updateById(req: Request, res: Response): Promise<Response> {
 		const transactionId: number = parseInt(req.params.id);
 		const transactionData: TTrasactionUpdate = req.body;
-		const transactionUpdated: TTransactionRequest =
+		const transactionUpdated: TTransactionResponse =
             await this.transactionsServices.updateById(
             	transactionId,
             	transactionData

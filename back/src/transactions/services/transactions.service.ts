@@ -10,6 +10,7 @@ import { transactionsRepositories } from "../repositories/knex/knex.transactions
 import {
 	TSpreadSheetData,
 	TTransactionCreateInDb,
+	TTransactionRequest,
 	TTransactionResponse,
 	TTrasactionUpdate,
 } from "../interfaces/transactions.interfaces";
@@ -101,7 +102,7 @@ export class TransactionsServices {
 					description: data.description,
 					date: data.date,
 					points_value: parseInt(data.points_value),
-					value: parseInt(data.points_value) * 100,
+					value: parseInt(data.value) * 100,
 					status: data.status,
 					user_id: userFind.id,
 				};
@@ -147,9 +148,20 @@ export class TransactionsServices {
 	}
 
 	async create(
-		transactionData: TTransactionCreateInDb
+		transactionData: TTransactionRequest
 	): Promise<TTransactionResponse> {
-		return await this.transactionsRepositories.create(transactionData);
+		const userFind = await this.usersRepositories.findByCpf(transactionData.cpf);
+
+		const transactionCreateInDb: TTransactionCreateInDb = {
+			description: transactionData.description,
+			date: transactionData.date,
+			points_value: transactionData.points_value,
+			value: transactionData.value * 100,
+			status: transactionData.status,
+			user_id: userFind.id,			
+		};
+
+		return await this.transactionsRepositories.create(transactionCreateInDb);
 	}
 
 	async findAll(): Promise<TTransactionResponse[]> {

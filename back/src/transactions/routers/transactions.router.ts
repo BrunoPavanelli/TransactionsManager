@@ -30,6 +30,7 @@ transactions.post("/upload", upload.single("file"), (req, res) =>
 transactions.post(
 	"",
 	sharedMiddlewares.validateSchema(schemas.request),
+	(req, res, next) => usersMiddlewares.verifyByCpf(req, res, next),
 	(req, res) => transactionsController.create(req, res)
 );
 
