@@ -1,54 +1,83 @@
 import database from "../../../database/database";
-import { TTransactionRequest, TTransactionResponse, TTrasactionUpdate } from "../../interfaces/transactions.interfaces";
+import {
+	TTransactionRequest,
+	TTransactionResponse,
+	TTrasactionUpdate,
+} from "../../interfaces/transactions.interfaces";
 import { TransactionsRepositories } from "../transactions.repositories";
 
 export class KnexTransactionRepositories implements TransactionsRepositories {
-    async create(transactionData: TTransactionRequest): Promise<TTransactionResponse> {
-        const newTransaction = await database("transactions").insert({
-            ...transactionData
-        })
+	async create(
+		transactionData: TTransactionRequest
+	): Promise<TTransactionResponse> {
+		const newTransaction = await database("transactions").insert({
+			...transactionData,
+		});
 
-        // await database("transactions").insert({"user_id": userId})
-    
-        const transactionResponse: TTransactionResponse = await database("transactions").where({
-            id: newTransaction[0]
-        }).select("*").first()
+		// await database("transactions").insert({"user_id": userId})
 
-        return transactionResponse
-    }
+		const transactionResponse: TTransactionResponse = await database(
+			"transactions"
+		)
+			.where({
+				id: newTransaction[0],
+			})
+			.select("*")
+			.first();
 
-    async findAll(): Promise<TTransactionResponse[]> {
-        const transactions: TTransactionResponse[] = await database.select("*").from("transactions")
+		return transactionResponse;
+	}
 
-        return transactions
-    }
+	async findAll(): Promise<TTransactionResponse[]> {
+		const transactions: TTransactionResponse[] = await database
+			.select("*")
+			.from("transactions");
 
-    async findByCpfUser(userId: number): Promise<TTransactionResponse[]> {
-        const transactions: TTransactionResponse[] = await database.select("*").from("transactions").where({
-            user_id: userId
-        })
+		return transactions;
+	}
 
-        return transactions
-    }
+	async findByCpfUser(userId: number): Promise<TTransactionResponse[]> {
+		const transactions: TTransactionResponse[] = await database
+			.select("*")
+			.from("transactions")
+			.where({
+				user_id: userId,
+			});
 
-    async updateById(trasactionId: number, newTransactionData: TTrasactionUpdate): Promise<TTransactionResponse> {
-        await database("transactions").where({ id: trasactionId }).first().update({
-            ...newTransactionData
-        })
+		return transactions;
+	}
 
-        const transactionUpdated: TTransactionResponse = await database("transactions").first().where({
-            id: trasactionId
-        }).select("*")
-        
+	async updateById(
+		trasactionId: number,
+		newTransactionData: TTrasactionUpdate
+	): Promise<TTransactionResponse> {
+		await database("transactions")
+			.where({ id: trasactionId })
+			.first()
+			.update({
+				...newTransactionData,
+			});
 
-        return transactionUpdated
-    }
+		const transactionUpdated: TTransactionResponse = await database(
+			"transactions"
+		)
+			.first()
+			.where({
+				id: trasactionId,
+			})
+			.select("*");
 
-    async deleteById(trasactionId: number): Promise<void> {
-        await database("transactions").where({ id: trasactionId }).first().delete()
+		return transactionUpdated;
+	}
 
-        return 
-    }
+	async deleteById(trasactionId: number): Promise<void> {
+		await database("transactions")
+			.where({ id: trasactionId })
+			.first()
+			.delete();
+
+		return;
+	}
 }
 
-export const transactionsRepositories = new KnexTransactionRepositories()
+export const transactionsRepositories = new KnexTransactionRepositories();

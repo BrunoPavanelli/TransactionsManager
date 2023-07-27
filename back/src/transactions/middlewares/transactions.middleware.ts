@@ -3,20 +3,28 @@ import { Request, Response, NextFunction } from "express";
 import { TransactionsMiddlewaresRepositories } from "../repositories/middleware/middlewares.transactions.repositorires";
 
 class TransactionsMiddlewares {
-    constructor(private transactionsRepositories: TransactionsMiddlewaresRepositories) {}
+	constructor(
+        private transactionsRepositories: TransactionsMiddlewaresRepositories
+	) {}
 
-    async verifyById(req: Request, res: Response, next: NextFunction) {
-        const transactionId = Number(req.params.id)
+	async verifyById(req: Request, res: Response, next: NextFunction) {
+		const transactionId = Number(req.params.id);
 
-        const transactionFind = await this.transactionsRepositories.findById(transactionId)
+		const transactionFind = await this.transactionsRepositories.findById(
+			transactionId
+		);
 
-        if (!transactionFind) return res.status(404).json({message: "Transaction not Found!"})
-    
-        next();   
-    }
+		if (!transactionFind)
+			return res.status(404).json({ message: "Transaction not Found!" });
+
+		next();
+	}
 }
 
-const transactionsMiddlewaresRepositories = new TransactionsMiddlewaresRepositories()
-const transactionsMiddlewares = new TransactionsMiddlewares(transactionsMiddlewaresRepositories)
+const transactionsMiddlewaresRepositories =
+    new TransactionsMiddlewaresRepositories();
+const transactionsMiddlewares = new TransactionsMiddlewares(
+	transactionsMiddlewaresRepositories
+);
 
-export default transactionsMiddlewares
+export default transactionsMiddlewares;

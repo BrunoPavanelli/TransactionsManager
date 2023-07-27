@@ -1,66 +1,81 @@
-import { Request, Response } from "express"
+import { Request, Response } from "express";
 
-import { TransactionsServices, transactionsServices } from "../services/transactions.service";
-import { TTransactionCreateInDb, TTransactionRequest, TTrasactionUpdate } from "../interfaces/transactions.interfaces";
+import {
+	TransactionsServices,
+	transactionsServices,
+} from "../services/transactions.service";
+import {
+	TTransactionCreateInDb,
+	TTransactionRequest,
+	TTrasactionUpdate,
+} from "../interfaces/transactions.interfaces";
 
 class TransactionsController {
-    constructor(private transactionsServices: TransactionsServices) {}
+	constructor(private transactionsServices: TransactionsServices) {}
 
-    async importFile(req: Request, res: Response) {
-        const { file } = req
-        const datas = await this.transactionsServices.importFile(file!)
-    
-        return res.json(datas)
-    }
+	async importFile(req: Request, res: Response) {
+		const { file } = req;
+		const datas = await this.transactionsServices.importFile(file!);
 
-    async create(req: Request, res: Response): Promise<Response> {
-        const userId = parseInt(res.locals.userId)
-        const transactionData: TTransactionRequest = req.body
+		return res.json(datas);
+	}
 
-        const newTransaction: TTransactionCreateInDb = await this.transactionsServices.create({
-            ...transactionData,
-            user_id: userId
-        });
+	async create(req: Request, res: Response): Promise<Response> {
+		const userId = parseInt(res.locals.userId);
+		const transactionData: TTransactionRequest = req.body;
 
-        return res.status(201).json(newTransaction)
-    }
+		const newTransaction: TTransactionCreateInDb =
+            await this.transactionsServices.create({
+            	...transactionData,
+            	user_id: userId,
+            });
 
-    async findAll(req: Request, res: Response): Promise<Response> {
-        const transactions: TTransactionRequest[] = await this.transactionsServices.findAll();
+		return res.status(201).json(newTransaction);
+	}
 
-        return res.json(transactions)
-    }
+	async findAll(req: Request, res: Response): Promise<Response> {
+		const transactions: TTransactionRequest[] =
+            await this.transactionsServices.findAll();
 
-    async findByCpfUser(req: Request, res: Response): Promise<Response> {
-        const { cpf } = req.body
-        const transactions: TTransactionRequest[] = await this.transactionsServices.findByCpfUser(cpf);
+		return res.json(transactions);
+	}
 
-        return res.json(transactions)
-    }
+	async findByCpfUser(req: Request, res: Response): Promise<Response> {
+		const { cpf } = req.body;
+		const transactions: TTransactionRequest[] =
+            await this.transactionsServices.findByCpfUser(cpf);
 
-    async findByToken(req: Request, res: Response): Promise<Response> {
-        const { cpf } = res.locals.tokenData
-        const transactions: TTransactionRequest[] = await this.transactionsServices.findByCpfUser(cpf);
+		return res.json(transactions);
+	}
 
-        return res.json(transactions)
-    }
+	async findByToken(req: Request, res: Response): Promise<Response> {
+		const { cpf } = res.locals.tokenData;
+		const transactions: TTransactionRequest[] =
+            await this.transactionsServices.findByCpfUser(cpf);
 
-    async updateById(req: Request, res: Response): Promise<Response> {
-        const transactionId: number = parseInt(req.params.id)
-        const transactionData: TTrasactionUpdate = req.body
-        const transactionUpdated: TTransactionRequest = await this.transactionsServices.updateById(transactionId, transactionData)
+		return res.json(transactions);
+	}
 
-        return res.json(transactionUpdated)
-    }
-    
-    async deleteById(req: Request, res: Response): Promise<Response> {
-        const transactionId: number = parseInt(req.params.id)
-        await this.transactionsServices.deleteById(transactionId)
+	async updateById(req: Request, res: Response): Promise<Response> {
+		const transactionId: number = parseInt(req.params.id);
+		const transactionData: TTrasactionUpdate = req.body;
+		const transactionUpdated: TTransactionRequest =
+            await this.transactionsServices.updateById(
+            	transactionId,
+            	transactionData
+            );
 
-        return res.sendStatus(204)
-    }      
+		return res.json(transactionUpdated);
+	}
+
+	async deleteById(req: Request, res: Response): Promise<Response> {
+		const transactionId: number = parseInt(req.params.id);
+		await this.transactionsServices.deleteById(transactionId);
+
+		return res.sendStatus(204);
+	}
 }
 
-const transactionsController = new TransactionsController(transactionsServices)
+const transactionsController = new TransactionsController(transactionsServices);
 
-export default transactionsController
+export default transactionsController;
