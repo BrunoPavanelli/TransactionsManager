@@ -53,6 +53,12 @@ transactions.get(
 	(req, res) => transactionsController.findByStatus(req, res)
 );
 
+transactions.get(
+	"/product",
+	sharedMiddlewares.validateSchema(schemas.product),
+	(req, res) => transactionsController.findByProduct(req, res)
+);
+
 transactions.patch(
 	"/:id",
 	sharedMiddlewares.validateSchema(schemas.update),

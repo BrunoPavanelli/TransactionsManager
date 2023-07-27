@@ -8,6 +8,7 @@ import { usersRepositories } from "../../users/repositories/knex/knex.users.repo
 import { TransactionsRepositories } from "../repositories/transactions.repositories";
 import { transactionsRepositories } from "../repositories/knex/knex.transactions.repositories";
 import {
+	TNoProducts,
 	TSpreadSheetData,
 	TTransactionCreateInDb,
 	TTransactionRequest,
@@ -176,6 +177,18 @@ export class TransactionsServices {
 
 	async findByStatus(status:string): Promise<TTransactionResponse[]> {
 		return await this.transactionsRepositories.findByStatus(status);
+	}
+
+	async findByProduct(product: string): Promise<TTransactionResponse[] | TNoProducts> {
+		const transactions = await this.transactionsRepositories.findByProduct(product);
+
+		if (transactions.length === 0) {
+			return {
+				message: "There is no transactions for this product."
+			};
+		}
+
+		return transactions;
 	}
 
 	async updateById(

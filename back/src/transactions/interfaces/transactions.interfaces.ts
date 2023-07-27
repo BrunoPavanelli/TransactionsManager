@@ -19,10 +19,15 @@ type TSpreadSheetData = {
     cpf: string;
 };
 
+type TNoProducts = {
+    message: string
+}
+
 export {
 	TTransactionResponse,
 	TTransactionRequest,
 	TTrasactionUpdate,
 	TTransactionCreateInDb,
 	TSpreadSheetData,
+	TNoProducts
 };

@@ -5,6 +5,7 @@ import {
 	transactionsServices,
 } from "../services/transactions.service";
 import {
+	TNoProducts,
 	TTransactionCreateInDb,
 	TTransactionRequest,
 	TTransactionResponse,
@@ -51,6 +52,14 @@ class TransactionsController {
 		const { status } = req.body;
 		const transactions: TTransactionResponse[] =
             await this.transactionsServices.findByStatus(status);
+
+		return res.json(transactions);
+	}
+	
+	async findByProduct(req: Request, res: Response): Promise<Response> {
+		const { product } = req.body;
+		const transactions: TTransactionResponse[] | TNoProducts =
+            await this.transactionsServices.findByProduct(product);
 
 		return res.json(transactions);
 	}

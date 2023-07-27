@@ -10,7 +10,8 @@ export abstract class TransactionsRepositories {
     ): Promise<TTransactionResponse>;
     abstract findAll(): Promise<TTransactionResponse[]>;
     abstract findByCpfUser(userId: number): Promise<TTransactionResponse[]>;
-    abstract findByStatus(status: string): Promise<TTransactionResponse[]>
+    abstract findByStatus(status: string): Promise<TTransactionResponse[]>;
+    abstract findByProduct(product: string): Promise<TTransactionResponse[]>;
     abstract updateById(
         trasactionId: number,
         transactionData: TTrasactionUpdate
