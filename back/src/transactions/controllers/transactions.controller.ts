@@ -47,6 +47,14 @@ class TransactionsController {
 		return res.json(transactions);
 	}
 
+	async findByStatus(req: Request, res: Response): Promise<Response> {
+		const { status } = req.body;
+		const transactions: TTransactionResponse[] =
+            await this.transactionsServices.findByStatus(status);
+
+		return res.json(transactions);
+	}
+
 	async findByToken(req: Request, res: Response): Promise<Response> {
 		const { cpf } = res.locals.tokenData;
 		const transactions: TTransactionResponse[] =

@@ -174,6 +174,10 @@ export class TransactionsServices {
 		return await this.transactionsRepositories.findByCpfUser(userFind.id);
 	}
 
+	async findByStatus(status:string): Promise<TTransactionResponse[]> {
+		return await this.transactionsRepositories.findByStatus(status);
+	}
+
 	async updateById(
 		transactionId: number,
 		newTransactionData: TTrasactionUpdate

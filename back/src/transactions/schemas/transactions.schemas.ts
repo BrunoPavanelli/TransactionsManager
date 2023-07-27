@@ -17,6 +17,10 @@ const response = transactions.omit({ cpf: true });
 
 const request = transactions.omit({ id: true, user_id: true });
 
+const status = z.object({
+	status: z.enum(["Approved", "Reproved", "In Analysis"]),
+});
+
 const toCreateInDb = transactions.omit({ id: true, cpf: true });
 
 const update = request.omit({
@@ -34,6 +38,7 @@ const schemas = {
 	update,
 	toCreateInDb,
 	transactionsWithOutId,
+	status
 };
 
 export default schemas;

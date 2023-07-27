@@ -45,6 +45,17 @@ export class KnexTransactionRepositories implements TransactionsRepositories {
 		return transactions;
 	}
 
+	async findByStatus(status: string): Promise<TTransactionResponse[]> {
+		const transactions: TTransactionResponse[] = await database
+			.select("*")
+			.from("transactions")
+			.where({
+				status: status
+			});
+
+		return transactions;
+	}
+
 	async updateById(
 		trasactionId: number,
 		newTransactionData: TTrasactionUpdate
