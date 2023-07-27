@@ -1,9 +1,9 @@
-import { users } from "./users/routers/users.router"
-import { transactions } from "./transactions/routers/transactions.router"
+import { users } from "./users/routers/users.router";
+import { transactions } from "./transactions/routers/transactions.router";
 
 const routes = {
-    users,
-    transactions
-}
+	users,
+	transactions,
+};
 
-export default routes
+export default routes;

@@ -12,5 +12,4 @@ export abstract class UsersRepositories {
 export abstract class UsersAbstractMiddlewares {
     abstract findById(userId: number): Promise<TUser>
     abstract findByEmail(email: string): Promise<TUser>
-    // abstract findByCpf(userCpf: string): Promise<TUser>
 }

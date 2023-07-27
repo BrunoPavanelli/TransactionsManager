@@ -1,9 +1,9 @@
-import { handleError } from "./handlerErrors.middleware"
-import validateSchema from "./validateSchema.middleware"
+import { handleError } from "./handlerErrors.middleware";
+import validateSchema from "./validateSchema.middleware";
 
 const sharedMiddlewares = {
-    handleError,
-    validateSchema
-}
+	handleError,
+	validateSchema,
+};
 
-export default sharedMiddlewares
+export default sharedMiddlewares;

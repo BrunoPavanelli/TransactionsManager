@@ -1,6 +1,6 @@
 import config from "../../knexfile";
 import { knex } from "knex";
 
-const database = knex(config)
+const database = knex(config);
 
-export default database
+export default database;

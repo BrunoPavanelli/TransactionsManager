@@ -1,72 +1,99 @@
 import database from "../../../database/database";
 import schemas from "../../schemas/users.schemas";
 import { UsersRepositories } from "../users.repositories";
-import { TUserRequest, TUserResponse, TUser, TUserUpdate, TLogin, TToken } from "../../interfaces/users.interfaces";
+import {
+	TUserRequest,
+	TUserResponse,
+	TUser,
+	TUserUpdate,
+} from "../../interfaces/users.interfaces";
 
 export class KnexUsersRepositories implements UsersRepositories {
-    constructor() {}
+	constructor() {}
 
-    async create(newUserData: TUserRequest): Promise<TUserResponse> {
-        const newUser = await database("users").insert({
-            ...newUserData
-        })
-    
-        const userData: TUser = await database("users").where({
-            id: newUser[0]
-        }).select("*").first()
-        
-        const userToReturn: TUserResponse = schemas.response.parse(userData)
+	async create(newUserData: TUserRequest): Promise<TUserResponse> {
+		const newUser = await database("users").insert({
+			...newUserData,
+		});
 
-        return userToReturn
-    }
-    
-    async findAll(): Promise<TUserResponse[]> {
-        const users: TUser[] = await database.select("*").from("users")
+		const userData: TUser = await database("users")
+			.where({
+				id: newUser[0],
+			})
+			.select("*")
+			.first();
 
-        const usersToReturn: TUserResponse[] = users.map(user => schemas.response.parse(user))
+		const userToReturn: TUserResponse = schemas.response.parse(userData);
 
-        return usersToReturn
-    }
-    
-    async findById(userId: number): Promise<TUserResponse> {
-        const user: TUser = await database.select("*").from("users").where({
-            id: userId
-        }).first()
+		return userToReturn;
+	}
 
-        const userToReturn: TUserResponse = schemas.response.parse(user)
+	async findAll(): Promise<TUserResponse[]> {
+		const users: TUser[] = await database.select("*").from("users");
 
-        return userToReturn
-    }
+		const usersToReturn: TUserResponse[] = users.map((user) =>
+			schemas.response.parse(user)
+		);
 
-    async findByCpf(userCpf: string): Promise<TUserResponse> {
-        const user: TUser = await database.first().select("*").from("users").where({
-            cpf: userCpf
-        })
+		return usersToReturn;
+	}
 
-        const userToReturn: TUserResponse = schemas.response.parse(user)
+	async findById(userId: number): Promise<TUserResponse> {
+		const user: TUser = await database
+			.select("*")
+			.from("users")
+			.where({
+				id: userId,
+			})
+			.first();
 
-        return userToReturn      
-    }
-    
-    async updateById(userId: number, newUserData: TUserUpdate): Promise<TUserResponse> {
-        await database("users").where({ id: userId }).first().update({
-            ...newUserData
-        })
+		const userToReturn: TUserResponse = schemas.response.parse(user);
 
-        const userData: TUser = await database("users").first().where({
-            id: userId
-        }).select("*")
-        
-        const userToReturn: TUserResponse = schemas.response.parse(userData)
+		return userToReturn;
+	}
 
-        return userToReturn
-    }
-    
-    async deleteById(userId: number): Promise<void> {
-        await database("users").where({ id: userId }).first().delete()
+	async findByCpf(userCpf: string): Promise<TUserResponse> {
+		const user: TUser = await database
+			.first()
+			.select("*")
+			.from("users")
+			.where({
+				cpf: userCpf,
+			});
 
-        return 
-    }
+		const userToReturn: TUserResponse = schemas.response.parse(user);
+
+		return userToReturn;
+	}
+
+	async updateById(
+		userId: number,
+		newUserData: TUserUpdate
+	): Promise<TUserResponse> {
+		await database("users")
+			.where({ id: userId })
+			.first()
+			.update({
+				...newUserData,
+			});
+
+		const userData: TUser = await database("users")
+			.first()
+			.where({
+				id: userId,
+			})
+			.select("*");
+
+		const userToReturn: TUserResponse = schemas.response.parse(userData);
+
+		return userToReturn;
+	}
+
+	async deleteById(userId: number): Promise<void> {
+		await database("users").where({ id: userId }).first().delete();
+
+		return;
+	}
 }
 
-export const usersRepositories = new KnexUsersRepositories()
+export const usersRepositories = new KnexUsersRepositories();
