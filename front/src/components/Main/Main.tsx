@@ -1,12 +1,10 @@
-import { Header } from "../Header/Header";
+import { IChildren } from "../../@types/@globalTypes";
 import { MainStyled } from "./MainStyled";
-import { TransactionsSection } from "./TransactionsSection/TransactionsSection";
 
-export const Main = () => {
+export const Main = ({children}: IChildren) => {
 	return (
 		<MainStyled>
-			<Header />
-			<TransactionsSection/>
+			{children}
 		</MainStyled>
 	);
 };
