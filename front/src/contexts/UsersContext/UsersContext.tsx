@@ -1,5 +1,6 @@
 import { createContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 import { ILoginData, IUserContext } from "./@usersTypes";
 import { IChildren } from "../../@types/@globalTypes";
@@ -18,7 +19,10 @@ export const UsersProvider = ({children}: IChildren) => {
 
             localStorage.setItem("@TransactionsM:Token", data.token);
             navigate("/dashboard");
+
+            toast.success("Succes!");
         } catch (err) {
+            toast.error("Invalid Credentials!");
             console.log(err);
         }
     };
@@ -26,6 +30,9 @@ export const UsersProvider = ({children}: IChildren) => {
     const userLogout = () => {
         localStorage.removeItem("@TransactionsM:Token");
         navigate("/");
+
+        
+        toast.success("Godbye!");
     };
 
     return (

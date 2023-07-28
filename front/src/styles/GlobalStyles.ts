@@ -9,7 +9,7 @@ export const Reset = createGlobalStyle`
         outline: none;
         list-style: none; 
         text-decoration: none;
-        color: red;
+        color: var(--black-0);
         
         -webkit-box-sizing: border-box;
         box-sizing: border-box;
