@@ -59,6 +59,12 @@ transactions.get(
 	(req, res) => transactionsController.findByProduct(req, res)
 );
 
+transactions.get(
+	"/date_range",
+	sharedMiddlewares.validateSchema(schemas.dateRange),
+	(req, res) => transactionsController.findByDateRange(req, res)
+);
+
 transactions.patch(
 	"/:id",
 	sharedMiddlewares.validateSchema(schemas.update),

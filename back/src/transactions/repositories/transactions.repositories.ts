@@ -1,4 +1,5 @@
 import {
+	TDateRange,
 	TTransactionCreateInDb,
 	TTransactionResponse,
 	TTrasactionUpdate,
@@ -12,6 +13,7 @@ export abstract class TransactionsRepositories {
     abstract findByCpfUser(userId: number): Promise<TTransactionResponse[]>;
     abstract findByStatus(status: string): Promise<TTransactionResponse[]>;
     abstract findByProduct(product: string): Promise<TTransactionResponse[]>;
+    abstract findByDateRange(dateRange: TDateRange): Promise<TTransactionResponse[]>;
     abstract updateById(
         trasactionId: number,
         transactionData: TTrasactionUpdate

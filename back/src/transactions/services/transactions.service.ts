@@ -1,3 +1,4 @@
+/* eslint-disable no-case-declarations */
 import fs from "node:fs";
 import { parse as csvParse } from "csv-parse";
 
@@ -8,6 +9,7 @@ import { usersRepositories } from "../../users/repositories/knex/knex.users.repo
 import { TransactionsRepositories } from "../repositories/transactions.repositories";
 import { transactionsRepositories } from "../repositories/knex/knex.transactions.repositories";
 import {
+	TDateRange,
 	TNoProducts,
 	TSpreadSheetData,
 	TTransactionCreateInDb,
@@ -35,6 +37,8 @@ export class TransactionsServices {
 					// eslint-disable-next-line prefer-const
 					let [cpf, description, date, points_value, value, status] =
                         line;
+
+					date = new Date(date).getTime();
 
 					value = value.split(".").join("").split(",").join("");
 					points_value = value
@@ -78,10 +82,11 @@ export class TransactionsServices {
 
 	async importFile(file: Express.Multer.File) {
 		const datas = await this.loadCsvFile(file);
+
 		const toCheck = {
 			cpf: "CPF",
 			description: "Descrição da transação",
-			date: "Data da transação",
+			date: NaN,
 			points_value: "Valor",
 			value: "Valor",
 			status: "Invalid data",
@@ -108,15 +113,16 @@ export class TransactionsServices {
 					user_id: userFind.id,
 				};
 
-				const newDataParsed =
-                    schemas.transactionsWithOutId.safeParse(newData);
-				if (!newDataParsed.success)
-					throw new AppError("Invalid File", 400);
+				// const newDataParsed =
+				//     schemas.transactionsWithOutId.safeParse(newData);
+				// if (!newDataParsed.success)
+				// 	throw new AppError("Invalid File", 400);
 
 				await this.transactionsRepositories.create({
 					...newData,
 				});
-			} catch {
+			} catch(err) {
+				console.log(err);
 				unregisteredUsers.push(data.cpf);
 			}
 		}
@@ -189,6 +195,45 @@ export class TransactionsServices {
 		}
 
 		return transactions;
+	}
+
+	private createMinAndMaxDate(dateRange: string): TDateRange {
+		const maxDate: number = new Date().getTime();
+		const oneDay: number = 1000 * 3600 * 24;
+		let minDate: number = 0;
+
+		switch (dateRange) {
+		case "30 days":
+			minDate = maxDate - (oneDay * 30);
+			break;
+		case "90 days":
+			minDate = maxDate - (oneDay * 90);
+			break;
+		case "180 days":
+			minDate = maxDate - (oneDay * 180);
+			break;
+		case "1 year":
+			minDate = maxDate - (oneDay * 365);
+			break;
+		case "2 years":
+			minDate = maxDate - (oneDay * 365 * 2);
+			break;
+		case "5 years":
+			minDate = maxDate - (oneDay * 365 * 5);
+			break;
+		}
+
+		return {
+			maxDate,
+			minDate
+		};
+
+	}
+
+	async findByDateRange(dateRange: string): Promise<TTransactionResponse[]> {
+		const dateRangeInTime = this.createMinAndMaxDate(dateRange);
+
+		return await this.transactionsRepositories.findByDateRange(dateRangeInTime);
 	}
 
 	async updateById(

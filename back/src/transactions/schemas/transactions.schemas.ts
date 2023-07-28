@@ -3,7 +3,7 @@ import { z } from "zod";
 const transactions = z.object({
 	id: z.number(),
 	description: z.string(),
-	date: z.string(),
+	date: z.number(),
 	points_value: z.number(),
 	value: z.number(),
 	status: z.enum(["Approved", "Reproved", "In Analysis"]),
@@ -35,6 +35,10 @@ const update = request.omit({
 	cpf: true
 });
 
+const dateRange = z.object({
+	dateRange: z.enum(["30 days", "90 days", "180 days", "1 year", "2 years", "5 years"])
+});
+
 const schemas = {
 	transactions,
 	request,
@@ -43,7 +47,8 @@ const schemas = {
 	toCreateInDb,
 	transactionsWithOutId,
 	status,
-	product
+	product,
+	dateRange
 };
 
 export default schemas;

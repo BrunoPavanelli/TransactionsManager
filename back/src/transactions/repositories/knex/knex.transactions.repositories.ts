@@ -1,5 +1,6 @@
 import database from "../../../database/database";
 import {
+	TDateRange,
 	TTransactionCreateInDb,
 	TTransactionResponse,
 	TTrasactionUpdate,
@@ -7,6 +8,7 @@ import {
 import { TransactionsRepositories } from "../transactions.repositories";
 
 export class KnexTransactionRepositories implements TransactionsRepositories {
+
 	async create(
 		transactionData: TTransactionCreateInDb
 	): Promise<TTransactionResponse> {
@@ -62,6 +64,17 @@ export class KnexTransactionRepositories implements TransactionsRepositories {
 			.from("transactions")
 			.whereILike(
 				"description", `%${product}%`
+			);
+
+		return transactions;
+	}
+
+	async findByDateRange(dateRange: TDateRange): Promise<TTransactionResponse[]> {
+		const transactions: TTransactionResponse[] = await database
+			.select("*")
+			.from("transactions")
+			.whereBetween(
+				"date", [dateRange.minDate, dateRange.maxDate]
 			);
 
 		return transactions;

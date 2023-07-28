@@ -12,7 +12,7 @@ type TTransactionCreateInDb = z.infer<typeof schemas.toCreateInDb>;
 
 type TSpreadSheetData = {
     description: string;
-    date: string;
+    date: number;
     points_value: string;
     value: string;
     status: "Approved" | "Reproved" | "In Analysis";
@@ -23,11 +23,17 @@ type TNoProducts = {
     message: string
 }
 
+type TDateRange = {
+    minDate: number,
+    maxDate: number
+}
+
 export {
 	TTransactionResponse,
 	TTransactionRequest,
 	TTrasactionUpdate,
 	TTransactionCreateInDb,
 	TSpreadSheetData,
-	TNoProducts
+	TNoProducts,
+	TDateRange
 };

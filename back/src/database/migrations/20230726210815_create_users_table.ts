@@ -15,7 +15,7 @@ export async function up(knex: Knex): Promise<void> {
 	await knex.schema.createTable("transactions", (table) => {
 		table.increments("id").primary();
 		table.string("description").notNullable();
-		table.string("date").notNullable();
+		table.bigInteger("date").notNullable();
 		table.integer("points_value").notNullable();
 		table.integer("value").notNullable();
 		table.enu("status", ["Approved", "Reproved", "In Analysis"]);
