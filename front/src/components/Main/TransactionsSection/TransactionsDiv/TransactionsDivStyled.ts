@@ -15,4 +15,9 @@ export const TransactionsDivStyled = styled.ul`
     &:first-child {
         border-radius: 0 50px 0 50px;
     }
+
+    .notransactions {
+        margin-inline: auto;
+        margin-top: 1rem;
+    }
 `;

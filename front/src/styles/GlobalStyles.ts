@@ -32,8 +32,9 @@ export const GlobalStyle = createGlobalStyle`
         --black-3: #3B4148;
         --primary-blue: #6069F0;
         --primary-white-blue: #74E5DA;
+        --primary-white-blue-opacity: rgba(116,229,218,0.8);
         --secondary-white-blue: #BDF8EF;
-        --error-form: #FC035D;
+        --error-form: rgba(	252, 3, 93, 0.8);
 
         /* Font-Family */
         /* --ff-Oswald: 'Oswald', sans-serif;
@@ -67,8 +68,8 @@ export const GlobalStyle = createGlobalStyle`
         --links-distance-line-to-text: 1.815rem;
         --post-height: 8rem;
 
-        --toastify-color-success: #74E5DA;
-        --toastify-color-error: #FC035D;
+        --toastify-color-success: rgba(116,229,218,0.8);
+        --toastify-color-error: rgba(	252, 3, 93, 0.8);
     }
 
     /* Utility-Classes */
@@ -170,7 +171,7 @@ export const GlobalStyle = createGlobalStyle`
     }
 
     .blue__white__text {
-        color: var(--primary-white-blue);
+        color: var(--primary-white-blue-opacity);
     }
 
     .errors_text {
