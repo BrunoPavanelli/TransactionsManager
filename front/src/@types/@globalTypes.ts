@@ -1,9 +1,12 @@
 import { ReactNode } from "react";
+import { UseFormRegisterReturn } from "react-hook-form";
 
 export interface IChildren {
-    children: ReactNode
+    children: ReactNode;
 }
 
 export interface IInput extends IChildren {
-    placeholder: string
+    placeholder: string;
+    type: string;
+    register: UseFormRegisterReturn<string>;
 }

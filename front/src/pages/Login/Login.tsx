@@ -1,5 +1,6 @@
 
 import { Link, useNavigate } from "react-router-dom";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { AiOutlineUser } from "react-icons/ai";
 import { PiPasswordBold } from "react-icons/pi";
 
@@ -9,26 +10,38 @@ import { Main } from "../../components/Main/Main";
 import { Input } from "../../components/Form/LoginRegisterDiv/Input/Input";
 import { ButtonStyled } from "../../components/Form/LoginRegisterDiv/Button/ButtonStyled";
 import { LoginRegisterDiv } from "../../components/Form/LoginRegisterDiv/LoginRegisterDiv";
-import { LoginRegisterForm } from "../../components/Form/LoginRegisterDiv/LoginRegisterForm/LoginRegisterForm";
+import { ILoginData } from "../../contexts/UsersContext/@usersTypes";
+import { useContext } from "react";
+import { UsersContext } from "../../contexts/UsersContext/UsersContext";
+import { LoginRegisterFormStyled } from "../../components/Form/LoginRegisterDiv/LoginRegisterForm/LoginRegisterFormStyled";
+
 
 export const Login = () => {
+    const { userLogin } = useContext(UsersContext);
+
     const navigate = useNavigate();
+
+    const {register, handleSubmit, formState: {errors}} = useForm<ILoginData>();
+
+    const submit: SubmitHandler<ILoginData> = async (data) => {
+        userLogin(data);
+    };
 
     return (
         <LoginStyled>
             <Header/>
             <Main>
                 <LoginRegisterDiv>
-                    <LoginRegisterForm>
-                        <Input placeholder="email: user@mail.com">
-                            <AiOutlineUser size={30}/>
-                        </Input>
-                        <Input placeholder="password: ******">
-                            <PiPasswordBold size={30}/>
-                        </Input>
-                        <ButtonStyled onClick={() => navigate("/dashboard")}>Login</ButtonStyled>
-                        <h2 className="black__text2">Not a member? <Link className="white__text" to="/register">Sign up now</Link></h2>
-                    </LoginRegisterForm>
+                    <LoginRegisterFormStyled onSubmit={handleSubmit(submit)}>
+                            <Input placeholder="email: user@mail.com" register={register("email")} type={"email"}>
+                                <AiOutlineUser size={30}/>
+                            </Input>
+                            <Input placeholder="password: ******" register={register("password")} type={"password"}>
+                                <PiPasswordBold size={30}/>
+                            </Input>
+                            <ButtonStyled type="submit">Login</ButtonStyled>
+                            <h2 className="black__text2">Not a member? <Link className="white__text" to="/register">Sign up now</Link></h2>
+                    </LoginRegisterFormStyled>
                 </LoginRegisterDiv>
             </Main>
         </LoginStyled>

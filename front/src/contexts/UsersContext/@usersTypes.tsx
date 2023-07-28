@@ -1,5 +1,5 @@
 export interface IUserContext {
-    
+    userLogin: (data: ILoginData) => Promise<void>,
 }
 
 export interface IUser {
@@ -7,6 +7,9 @@ export interface IUser {
     email: string,
     username: string,
     role: string,
-    cpf?: string,
-    created_at?: string,
+}
+
+export interface ILoginData {
+    email: string,
+    password: string
 }
