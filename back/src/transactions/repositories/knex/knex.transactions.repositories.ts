@@ -21,7 +21,7 @@ export class KnexTransactionRepositories implements TransactionsRepositories {
 			"transactions"
 		)
 			.where({
-				id: newTransaction[0],
+				date: transactionData.date,
 			})
 			.select("*")
 			.first();
