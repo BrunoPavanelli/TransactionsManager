@@ -3,7 +3,7 @@ import { TransactionsDivStyled } from "./TransactionsDivStyled";
 
 export const TransactionsDiv = () => {
 	return (
-		<TransactionsDivStyled>
+		<TransactionsDivStyled className="container__page">
 			<TransactionsCard/>
 			<TransactionsCard/>
 			<TransactionsCard/>

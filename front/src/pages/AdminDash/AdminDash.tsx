@@ -11,7 +11,6 @@ export const AdminDash = () => {
     return (
         <AdminDashStyled>
             <Header children={<CiLogout className="logout" size={32} onClick={userLogout}/>}/>
-            <h1>ADMIN</h1>
         </AdminDashStyled>
     );
 };

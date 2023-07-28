@@ -1,11 +1,18 @@
 import { styled } from "styled-components";
 
-export const TransactionsDivStyled = styled.div`
+export const TransactionsDivStyled = styled.ul`
+    min-height: 50%;
     height: 75%;
-    width: 90%;
 
-    border: 2px solid beige;
+    margin-inline: auto;
 
-    padding: 1rem;
     overflow-y: auto;
+
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    &:first-child {
+        border-radius: 0 50px 0 50px;
+    }
 `;
