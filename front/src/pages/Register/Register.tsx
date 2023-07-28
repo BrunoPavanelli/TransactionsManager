@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { useForm, SubmitHandler } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { AiOutlineUser } from "react-icons/ai";
 import { PiPasswordBold } from "react-icons/pi";
 import { MdDriveFileRenameOutline } from "react-icons/md";
@@ -14,11 +15,14 @@ import { ButtonStyled } from "../../components/Form/LoginRegisterDiv/Button/Butt
 import { LoginRegisterFormStyled } from "../../components/Form/LoginRegisterDiv/LoginRegisterForm/LoginRegisterFormStyled";
 import { IRegisterData } from "../../contexts/UsersContext/@usersTypes";
 import { UsersContext } from "../../contexts/UsersContext/UsersContext";
+import { registerSchema } from "./validator";
 
 export const Register = () => {
     const { userRegister } = useContext(UsersContext);
 
-    const {register, handleSubmit} = useForm<IRegisterData>();
+    const {register, handleSubmit, formState: { errors }} = useForm<IRegisterData>({
+        resolver: zodResolver(registerSchema)
+    });
 
     const submit: SubmitHandler<IRegisterData> = async (data) => {
         userRegister(data);
@@ -29,16 +33,16 @@ export const Register = () => {
             <Header />
             <Main>
                 <LoginRegisterFormStyled onSubmit={handleSubmit(submit)}>
-                    <Input placeholder="username: John Doe" type="text" register={register("username")}>
+                    <Input placeholder="username: John Doe" type="text" register={register("username")} errors={errors.username?.message}>
                         <MdDriveFileRenameOutline size={30} />
                     </Input>
-                    <Input placeholder="document: 123.456.78-00" type="text" register={register("cpf")}>
+                    <Input placeholder="document: 123.456.78-00" type="text" register={register("cpf")} errors={errors.cpf?.message}>
                         <HiIdentification size={30} />
                     </Input>
-                    <Input placeholder="email: user@mail.com" type="email" register={register("email")}>
+                    <Input placeholder="email: user@mail.com" type="email" register={register("email")} errors={errors.email?.message}>
                         <AiOutlineUser size={30} />
                     </Input>
-                    <Input placeholder="password: ******" type="password" register={register("password")}>
+                    <Input placeholder="password: ******" type="password" register={register("password")} errors={errors.password?.message}>
                         <PiPasswordBold size={30} />
                     </Input>
                     <ButtonStyled type="submit">

@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
-import { UseFormRegisterReturn } from "react-hook-form";
+import { FieldErrors, UseFormRegisterReturn } from "react-hook-form";
+import { ILoginData, IRegisterData } from "../contexts/UsersContext/@usersTypes";
 
 export interface IChildren {
     children: ReactNode;
@@ -13,6 +14,7 @@ export interface IInput extends IChildren {
     placeholder: string;
     type: string;
     register: UseFormRegisterReturn<string>;
+    errors?: string
 }
 
 export interface IDecodedToken {

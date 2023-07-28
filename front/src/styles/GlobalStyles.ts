@@ -170,6 +170,13 @@ export const GlobalStyle = createGlobalStyle`
         color: var(--primary-white-blue);
     }
 
+    .errors_text {
+        color: var(--error-form);
+
+        position: absolute;
+        right: 1rem;
+    }
+
     /* Letter Spacing */
     .letterspace__header {
         letter-spacing: 0.125rem;
