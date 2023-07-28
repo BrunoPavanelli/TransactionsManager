@@ -36,6 +36,8 @@ export const GlobalStyle = createGlobalStyle`
         /* Font-Family */
         /* --ff-Oswald: 'Oswald', sans-serif;
         --ff-Inter: 'Inter', sans-serif; */
+        --ff-Kanit: 'Kanit', sans-serif;
+        --ff-Pacifico: 'Pacifico', cursive;
 
         /* Font-Size */
         --fs-50: 3.125rem;
@@ -67,18 +69,9 @@ export const GlobalStyle = createGlobalStyle`
     /* Utility-Classes */
     /* Container */
     .container__page {
-        /* max-width: max-content; */
         min-width: 80%;
         max-width: 1000px;
         height: 100%;
-/* 
-        margin: auto;
-        padding-block: 68px;
-
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        justify-content: space-between; */
     }
     .container__pages--forms {
         padding-inline: 7rem;
@@ -101,6 +94,60 @@ export const GlobalStyle = createGlobalStyle`
      }
 
     /* Texts */
+    /* Fonts */
+    .ff__kanit {
+        font-family: var(--ff-Kanit);
+    }
+
+    .fw-400 {
+        font-weight: var(--fw-400);
+    }
+
+    .fw-500 {
+        font-weight: var(--fw-500);
+    }
+
+    .fw-600 {
+        font-weight: var(--fw-600);
+    }
+
+    .fw-700 {
+        font-weight: var(--fw-700);
+    }
+
+    .fs-10 {
+        font-size: var(--fs-10);
+    }
+
+    .fs-16 {
+        font-size: var(--fs-16);
+    }
+
+    .fs-19 {
+        font-size: var(--fs-19);
+    }
+
+    .fs-20 {
+        font-size: var(--fs-20);
+    }
+
+    .fs-25 {
+        font-size: var(--fs-25);
+    }
+
+    .fs-29 {
+        font-size: var(--fs-29);
+    }
+
+    .fs-30 {
+        font-size: var(--fs-30);
+    }
+
+    .fs-50 {
+        font-size: var(--fs-50);
+    }
+    
+    /* Colors */
     .white__text {
         color: var(--white);
     }
