@@ -10,6 +10,7 @@ import {
 	TUserResponse,
 	TUserUpdate,
 } from "../interfaces/users.interfaces";
+import schemas from "../schemas/users.schemas";
 
 export class UsersServices {
 	constructor(private usersRepository: UsersRepositories) {}
@@ -47,7 +48,7 @@ export class UsersServices {
 
 	async findByCpf(userCpf: string): Promise<TUserResponse> {
 		const userFind = await this.usersRepository.findByCpf(userCpf);
-
+		
 		return userFind;
 	}
 

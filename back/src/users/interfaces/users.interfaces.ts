@@ -8,6 +8,8 @@ type TUserRequest = z.infer<typeof schemas.request>;
 
 type TUserResponse = z.infer<typeof schemas.response>;
 
+type TUserLoggedResponse = z.infer<typeof schemas.responseLoggedUser>
+
 type TUserUpdate = z.infer<typeof schemas.update>;
 
 type TLogin = z.infer<typeof schemas.login>;
@@ -20,6 +22,7 @@ export {
 	TUser,
 	TUserRequest,
 	TUserResponse,
+	TUserLoggedResponse,
 	TUserUpdate,
 	TLogin,
 	TToken,
