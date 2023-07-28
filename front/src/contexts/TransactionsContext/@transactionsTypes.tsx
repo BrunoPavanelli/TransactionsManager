@@ -4,7 +4,7 @@ export interface IUserContext {
     setTransactions: React.Dispatch<React.SetStateAction<ITransaction[]>>
     convertTransactionData: (transaction: ITransaction) => ITransaction,
     filteredTransactions: ITransaction[],
-    filterTransactions: (status: string) => void
+    filterTransactionsByStatus: (status: string) => void
 }
 
 export interface ITransaction 	{

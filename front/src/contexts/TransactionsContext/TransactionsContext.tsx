@@ -43,10 +43,34 @@ export const TransactionsProvider = ({children}: IChildren) => {
 
     };
 
-    const filterTransactions = (status: string): void => {
+    const filterTransactionsByStatus = (status: string): void => {
         const filteredTransactions = transactions!.filter(transaction => transaction.status === status);
         status === "Status" ? setFilteredTransactions(transactions) : setFilteredTransactions(filteredTransactions);
     };
+
+    // const filterTransactionsByDate = async (dateRange: string): Promise<void> => {
+    //     if (dateRange === "Date") {
+    //         setTransactions(transactions);
+    //         return;
+    //     }
+
+    //     const token = localStorage.getItem("@TransactionsM:Token");
+    //     try {
+    //         const { data } = await api.get("transactions/date_range", {
+    //             data: {
+    //                 dateRange: dateRange
+    //             },
+    //             headers: {
+    //                 Authorization: `Bearer ${token}`
+    //             }
+    //         }); 
+    //         setTransactions(data);
+
+    //     } catch (error) {
+    //         toast.error("Some Error in Transactions Filter By Date req");
+    //         console.log(error);
+    //     }        
+    // };
 
     return (
         <TransactionsContext.Provider value={{
@@ -55,7 +79,7 @@ export const TransactionsProvider = ({children}: IChildren) => {
                 retrieveUserTransactions,
                 convertTransactionData,
                 filteredTransactions,
-                filterTransactions
+                filterTransactionsByStatus
             }}>
             {children}
         </TransactionsContext.Provider>
