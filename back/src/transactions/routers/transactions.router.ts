@@ -20,6 +20,10 @@ transactions.get("/token", (req, res) =>
 	transactionsController.findByToken(req, res)
 );
 
+transactions.get("/token/subtotal", (req, res) =>
+	transactionsController.retrieveApprovedTransactionsSubTotal(req, res)
+);
+
 transactions.post("/token/date_range", (req, res) =>
 	transactionsController.findByTokenAndDateRange(req, res)
 );

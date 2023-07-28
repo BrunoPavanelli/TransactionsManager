@@ -11,6 +11,7 @@ import {
 	TDateRange,
 	TNoProducts,
 	TSpreadSheetData,
+	TSubtotal,
 	TTransactionCreateInDb,
 	TTransactionRequest,
 	TTransactionResponse,
@@ -244,6 +245,20 @@ export class TransactionsServices {
 		const userFind = await this.usersRepositories.findByCpf(userCpf);
 
 		return await this.transactionsRepositories.findByTokenAndDateRange(dateRangeInTime, userFind.id);
+	}
+
+	async retrieveApprovedTransactionsSubTotal(userId: string): Promise<TSubtotal> {
+		const transactions: TTransactionResponse[] = await this.transactionsRepositories.findByApprovedStatus(userId);
+
+		const subTotal = transactions.reduce((acc, transaction) => {
+			const value = transaction.value / 100;
+
+			return acc + value;
+		}, 0);
+
+		return {
+			subtotal: subTotal
+		};
 	}
 
 	async updateById(

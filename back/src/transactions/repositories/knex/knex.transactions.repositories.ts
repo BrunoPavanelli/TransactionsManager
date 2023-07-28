@@ -106,6 +106,20 @@ export class KnexTransactionRepositories implements TransactionsRepositories {
 		return transactions;
 	}
 
+	async findByApprovedStatus(userId: string): Promise<TTransactionResponse[]> {
+		const transactions: TTransactionResponse[] = await database
+			.select("*")
+			.from("transactions")
+			.where({
+				status: "Approved"
+			})
+			.andWhere({
+				user_id: userId
+			});
+			
+		return transactions;		
+	}
+
 	async updateById(
 		trasactionId: string,
 		newTransactionData: TTrasactionUpdate
