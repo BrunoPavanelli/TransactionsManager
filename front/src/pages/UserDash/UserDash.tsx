@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { CiLogout } from "react-icons/ci";
 
 import { Header } from "../../components/Header/Header";
@@ -8,12 +8,7 @@ import { OperationBar } from "../../components/Main/OperationBar/OperationBar";
 import { TransactionsSection } from "../../components/Main/TransactionsSection/TransactionsSection";
 
 export const UserDash = () => {
-    const { userLogout, retrieveUserTransactions, retrieveUserData, user } = useContext(UsersContext);
-
-    useEffect(() => {
-        retrieveUserData();
-        retrieveUserTransactions();
-    }, []);
+    const { userLogout } = useContext(UsersContext);
 
     return (
         <UserDashStyled>
