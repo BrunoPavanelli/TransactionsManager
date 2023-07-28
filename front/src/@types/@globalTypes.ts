@@ -14,3 +14,11 @@ export interface IInput extends IChildren {
     type: string;
     register: UseFormRegisterReturn<string>;
 }
+
+export interface IDecodedToken {
+    cpf: string
+    exp: bigint
+    iat: bigint
+    role: string
+    sub: string
+}

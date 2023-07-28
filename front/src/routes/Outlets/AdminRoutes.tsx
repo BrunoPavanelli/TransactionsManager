@@ -3,17 +3,14 @@ import jwt_decode from "jwt-decode";
 
 import { IDecodedToken } from "../../@types/@globalTypes";
 
-export const ProtectedRoutes = () => {
+export const AdminRoutes = () => {
     const token = localStorage.getItem("@TransactionsM:Token");
 
     if (token) {
         const decodedToken: IDecodedToken = jwt_decode(token);
 
-        return decodedToken.role !== "admin" ? <Outlet /> : <Navigate to="/admin"/>;
+        return decodedToken.role === "admin" ? <Outlet /> : <Navigate to="/dashboard"/>;
     }
 
-
-    return token ? <Outlet /> : <Navigate to="/"/>;
+    return <Navigate to="/"/>;
 };
-
-
