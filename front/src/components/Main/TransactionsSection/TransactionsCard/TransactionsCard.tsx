@@ -1,13 +1,18 @@
+import { ITransaction } from "../../../../contexts/UsersContext/@usersTypes";
 import { TransactionsCardStyled } from "./TransactionsCardStyled";
 
-export const TransactionsCard = () => {
+interface ITransactionsCardProps {
+	transaction: ITransaction
+}
+
+export const TransactionsCard = ({ transaction }: ITransactionsCardProps) => {
 	return (
 		<TransactionsCardStyled>
-			<p>Venda do produto Z</p>
-			<p>2022/10/10</p>
-			<p>10000</p>
-			<p>R$ 100.000,00</p>
-			<p>Approved</p>
+			<p>{transaction.description}</p>
+			<p>{transaction.date}</p>
+			<p>{transaction.points_value}</p>
+			<p>{transaction.value}</p>
+			<p>{transaction.status}</p>
 		</TransactionsCardStyled>
 	);
 };
