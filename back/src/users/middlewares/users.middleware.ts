@@ -56,8 +56,12 @@ class UsersMiddlewares {
 				if (!userFind) return res.status(404).json({ message: "User not Found!" });
 			}
 	
-			if (method === "POST") {
+			if (path !== "/transactions/cpf" && method === "POST") {
 				if (userFind) return res.status(409).json({ message: "CPF already registered" });
+			}
+
+			if (path === "/transactions/cpf" && method === "POST") {
+				if (!userFind) return res.status(404).json({ message: "User not Found!" });
 			}
 		}
 		next();

@@ -28,6 +28,10 @@ type TDateRange = {
     maxDate: number
 }
 
+type TSubtotal = {
+    subtotal: number
+}
+
 type TValueRange = z.infer<typeof schemas.valueRange>
 
 export {
@@ -38,5 +42,6 @@ export {
 	TSpreadSheetData,
 	TNoProducts,
 	TDateRange,
-	TValueRange
+	TValueRange,
+	TSubtotal
 };

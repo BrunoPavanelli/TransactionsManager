@@ -11,6 +11,7 @@ import {
 	TDateRange,
 	TNoProducts,
 	TSpreadSheetData,
+	TSubtotal,
 	TTransactionCreateInDb,
 	TTransactionRequest,
 	TTransactionResponse,
@@ -227,7 +228,6 @@ export class TransactionsServices {
 			maxDate,
 			minDate
 		};
-
 	}
 
 	async findByDateRange(dateRange: string): Promise<TTransactionResponse[]> {
@@ -238,6 +238,27 @@ export class TransactionsServices {
 
 	async findByValueRange(valueRange: TValueRange): Promise<TTransactionResponse[]> {
 		return await this.transactionsRepositories.findByValueRange(valueRange);
+	}
+
+	async findByTokenAndDateRange(dateRange: string, userCpf: string): Promise<TTransactionResponse[]> {
+		const dateRangeInTime = this.createMinAndMaxDate(dateRange);
+		const userFind = await this.usersRepositories.findByCpf(userCpf);
+
+		return await this.transactionsRepositories.findByTokenAndDateRange(dateRangeInTime, userFind.id);
+	}
+
+	async retrieveApprovedTransactionsSubTotal(userId: string): Promise<TSubtotal> {
+		const transactions: TTransactionResponse[] = await this.transactionsRepositories.findByApprovedStatus(userId);
+
+		const subTotal = transactions.reduce((acc, transaction) => {
+			const value = transaction.value / 100;
+
+			return acc + value;
+		}, 0);
+
+		return {
+			subtotal: subTotal
+		};
 	}
 
 	async updateById(

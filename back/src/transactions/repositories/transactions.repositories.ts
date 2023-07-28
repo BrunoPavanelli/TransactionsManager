@@ -16,6 +16,8 @@ export abstract class TransactionsRepositories {
     abstract findByProduct(product: string): Promise<TTransactionResponse[]>;
     abstract findByDateRange(dateRange: TDateRange): Promise<TTransactionResponse[]>;
     abstract findByValueRange(valueRange: TValueRange): Promise<TTransactionResponse[]>;
+    abstract findByTokenAndDateRange(dateRange: TDateRange, userId: string): Promise<TTransactionResponse[]>;
+    abstract findByApprovedStatus(userId: string): Promise<TTransactionResponse[]>;
     abstract updateById(
         trasactionId: string,
         transactionData: TTrasactionUpdate
