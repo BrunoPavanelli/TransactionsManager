@@ -38,7 +38,7 @@ export class KnexUsersRepositories implements UsersRepositories {
 		return usersToReturn;
 	}
 
-	async findById(userId: number): Promise<TUserResponse> {
+	async findById(userId: string): Promise<TUserResponse> {
 		const user: TUser = await database
 			.select("*")
 			.from("users")
@@ -67,7 +67,7 @@ export class KnexUsersRepositories implements UsersRepositories {
 	}
 
 	async updateById(
-		userId: number,
+		userId: string,
 		newUserData: TUserUpdate
 	): Promise<TUserResponse> {
 		await database("users")
@@ -89,7 +89,7 @@ export class KnexUsersRepositories implements UsersRepositories {
 		return userToReturn;
 	}
 
-	async deleteById(userId: number): Promise<void> {
+	async deleteById(userId: string): Promise<void> {
 		await database("users").where({ id: userId }).first().delete();
 
 		return;

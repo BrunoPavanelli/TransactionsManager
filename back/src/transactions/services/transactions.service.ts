@@ -2,7 +2,6 @@
 import fs from "node:fs";
 import { parse as csvParse } from "csv-parse";
 
-import schemas from "../schemas/transactions.schemas";
 import { AppError } from "../../shared/handlerErrors.middleware";
 import { UsersRepositories } from "../../users/repositories/users.repositories";
 import { usersRepositories } from "../../users/repositories/knex/knex.users.repositories";
@@ -242,7 +241,7 @@ export class TransactionsServices {
 	}
 
 	async updateById(
-		transactionId: number,
+		transactionId: string,
 		newTransactionData: TTrasactionUpdate
 	): Promise<TTransactionResponse> {
 		return await this.transactionsRepositories.updateById(
@@ -251,7 +250,7 @@ export class TransactionsServices {
 		);
 	}
 
-	async deleteById(transactionId: number): Promise<void> {
+	async deleteById(transactionId: string): Promise<void> {
 		return await this.transactionsRepositories.deleteById(transactionId);
 	}
 }

@@ -11,18 +11,18 @@ export abstract class TransactionsRepositories {
         transactionData: TTransactionCreateInDb
     ): Promise<TTransactionResponse>;
     abstract findAll(): Promise<TTransactionResponse[]>;
-    abstract findByCpfUser(userId: number): Promise<TTransactionResponse[]>;
+    abstract findByCpfUser(userId: string): Promise<TTransactionResponse[]>;
     abstract findByStatus(status: string): Promise<TTransactionResponse[]>;
     abstract findByProduct(product: string): Promise<TTransactionResponse[]>;
     abstract findByDateRange(dateRange: TDateRange): Promise<TTransactionResponse[]>;
     abstract findByValueRange(valueRange: TValueRange): Promise<TTransactionResponse[]>;
     abstract updateById(
-        trasactionId: number,
+        trasactionId: string,
         transactionData: TTrasactionUpdate
     ): Promise<TTransactionResponse>;
-    abstract deleteById(trasactionId: number): Promise<void>;
+    abstract deleteById(trasactionId: string): Promise<void>;
 }
 
 export abstract class TransactionsAbstractMiddlewares {
-    abstract findById(trasactionId: number): Promise<TTransactionResponse>;
+    abstract findById(trasactionId: string): Promise<TTransactionResponse>;
 }

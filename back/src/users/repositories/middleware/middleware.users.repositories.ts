@@ -3,7 +3,7 @@ import { TUser } from "../../interfaces/users.interfaces";
 import { UsersAbstractMiddlewares } from "../users.repositories";
 
 export class UsersMiddlewaresRepositories implements UsersAbstractMiddlewares {
-	async findById(userId: number): Promise<TUser> {
+	async findById(userId: string): Promise<TUser> {
 		const userFind: TUser = await database
 			.select("*")
 			.from("users")

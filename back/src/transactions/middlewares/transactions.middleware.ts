@@ -8,7 +8,7 @@ class TransactionsMiddlewares {
 	) {}
 
 	async verifyById(req: Request, res: Response, next: NextFunction) {
-		const transactionId = Number(req.params.id);
+		const transactionId = req.params.id;
 
 		const transactionFind = await this.transactionsRepositories.findById(
 			transactionId

@@ -5,7 +5,7 @@ import { TransactionsAbstractMiddlewares } from "../transactions.repositories";
 export class TransactionsMiddlewaresRepositories
 implements TransactionsAbstractMiddlewares
 {
-	async findById(transactionId: number): Promise<TTransactionResponse> {
+	async findById(transactionId: string): Promise<TTransactionResponse> {
 		const transactionFind: TTransactionResponse = await database
 			.select("*")
 			.from("transactions")

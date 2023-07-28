@@ -1,13 +1,13 @@
 import { z } from "zod";
 
 const transactions = z.object({
-	id: z.number(),
+	id: z.string(),
 	description: z.string(),
 	date: z.number(),
 	points_value: z.number(),
 	value: z.number(),
 	status: z.enum(["Approved", "Reproved", "In Analysis"]),
-	user_id: z.number(),
+	user_id: z.string(),
 	cpf: z.string()
 });
 

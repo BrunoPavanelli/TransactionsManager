@@ -13,7 +13,7 @@ class UsersMiddlewares {
 		res: Response,
 		next: NextFunction
 	): Promise<void | Response> {
-		const userId = Number(req.params.id);
+		const userId: string = req.params.id;
 
 		const userFind = await this.usersRepositories.findById(userId);
 

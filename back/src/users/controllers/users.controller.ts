@@ -35,7 +35,7 @@ class UsersControllers {
 	}
 
 	async findById(req: Request, res: Response): Promise<Response> {
-		const userId: number = parseInt(req.params.id);
+		const userId: string = req.params.id;
 		const userFind: TUserResponse = await this.usersServices.findById(
 			userId
 		);
@@ -44,7 +44,7 @@ class UsersControllers {
 	}
 
 	async findByToken(req: Request, res: Response): Promise<Response> {
-		const userId: number = parseInt(res.locals.tokenData.id);
+		const userId: string = res.locals.tokenData.id;
 		const userFind: TUserResponse = await this.usersServices.findById(
 			userId
 		);
@@ -62,7 +62,7 @@ class UsersControllers {
 	}
 
 	async updateById(req: Request, res: Response): Promise<Response> {
-		const userId: number = parseInt(req.params.id);
+		const userId: string = req.params.id;
 		const userData: TUserUpdate = req.body;
 		const userUpdated: TUserResponse = await this.usersServices.updateById(
 			userId,
@@ -73,7 +73,7 @@ class UsersControllers {
 	}
 
 	async deleteById(req: Request, res: Response): Promise<Response> {
-		const userId: number = parseInt(req.params.id);
+		const userId: string = req.params.id;
 		await this.usersServices.deleteById(userId);
 
 		return res.sendStatus(204);

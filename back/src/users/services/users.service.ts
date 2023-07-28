@@ -41,7 +41,7 @@ export class UsersServices {
 		return await this.usersRepository.findAll();
 	}
 
-	async findById(userId: number): Promise<TUserResponse> {
+	async findById(userId: string): Promise<TUserResponse> {
 		return await this.usersRepository.findById(userId);
 	}
 
@@ -52,7 +52,7 @@ export class UsersServices {
 	}
 
 	async updateById(
-		userId: number,
+		userId: string,
 		newUserData: TUserUpdate
 	): Promise<TUserResponse> {
 		if (newUserData.password) {
@@ -70,7 +70,7 @@ export class UsersServices {
 		return await this.usersRepository.updateById(userId, newUserData);
 	}
 
-	async deleteById(userId: number): Promise<void> {
+	async deleteById(userId: string): Promise<void> {
 		return await this.usersRepository.deleteById(userId);
 	}
 }

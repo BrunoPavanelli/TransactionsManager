@@ -37,7 +37,7 @@ export class KnexTransactionRepositories implements TransactionsRepositories {
 		return transactions;
 	}
 
-	async findByCpfUser(userId: number): Promise<TTransactionResponse[]> {
+	async findByCpfUser(userId: string): Promise<TTransactionResponse[]> {
 		const transactions: TTransactionResponse[] = await database
 			.select("*")
 			.from("transactions")
@@ -93,7 +93,7 @@ export class KnexTransactionRepositories implements TransactionsRepositories {
 	}
 
 	async updateById(
-		trasactionId: number,
+		trasactionId: string,
 		newTransactionData: TTrasactionUpdate
 	): Promise<TTransactionResponse> {
 		await database("transactions")
@@ -115,7 +115,7 @@ export class KnexTransactionRepositories implements TransactionsRepositories {
 		return transactionUpdated;
 	}
 
-	async deleteById(trasactionId: number): Promise<void> {
+	async deleteById(trasactionId: string): Promise<void> {
 		await database("transactions")
 			.where({ id: trasactionId })
 			.first()

@@ -90,7 +90,7 @@ class TransactionsController {
 	}
 
 	async updateById(req: Request, res: Response): Promise<Response> {
-		const transactionId: number = parseInt(req.params.id);
+		const transactionId: string = req.params.id;
 		const transactionData: TTrasactionUpdate = req.body;
 		const transactionUpdated: TTransactionResponse =
             await this.transactionsServices.updateById(
@@ -102,7 +102,7 @@ class TransactionsController {
 	}
 
 	async deleteById(req: Request, res: Response): Promise<Response> {
-		const transactionId: number = parseInt(req.params.id);
+		const transactionId: string = req.params.id;
 		await this.transactionsServices.deleteById(transactionId);
 
 		return res.sendStatus(204);

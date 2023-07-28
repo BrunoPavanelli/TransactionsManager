@@ -2,7 +2,7 @@ import { Knex } from "knex";
 
 export async function up(knex: Knex): Promise<void> {
 	await knex.schema.createTable("users", (table) => {
-		table.increments("id").primary();
+		table.uuid("id").primary().defaultTo(knex.fn.uuid());
 		table.string("username").notNullable().checkLength("<=", 255);
 		table.string("email").notNullable().checkLength("<=", 255);
 		table.string("password").notNullable().checkLength("<=", 255);
@@ -13,13 +13,13 @@ export async function up(knex: Knex): Promise<void> {
 	});
 
 	await knex.schema.createTable("transactions", (table) => {
-		table.increments("id").primary();
+		table.uuid("id").primary().defaultTo(knex.fn.uuid());
 		table.string("description").notNullable();
 		table.bigInteger("date").notNullable();
 		table.integer("points_value").notNullable();
 		table.integer("value").notNullable();
 		table.enu("status", ["Approved", "Reproved", "In Analysis"]);
-		table.integer("user_id").unsigned().nullable();
+		table.string("user_id").nullable();
 		table.foreign("user_id").references("users.id");
 	});
 }
