@@ -1,4 +1,5 @@
-import { createContext, useState } from "react";
+import { createContext } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { ILoginData, IUserContext } from "./@usersTypes";
 import { IChildren } from "../../@types/@globalTypes";
@@ -7,12 +8,16 @@ import { api } from "../../service/api";
 export const UsersContext = createContext<IUserContext>({} as IUserContext);
 
 export const UsersProvider = ({children}: IChildren) => {
-    const [user, setUser] = useState();
+    // const [user, setUser] = useState();
 
-    const userLogin = async (data: ILoginData) => {
+    const navigate = useNavigate();
+
+    const userLogin = async (loginData: ILoginData) => {
         try {
-            const response = await api.post("/users/login", data);
-            console.log(response);
+            const { data } = await api.post("/users/login", loginData);
+
+            localStorage.setItem("@TransactionsM:Token", data.token);
+            navigate("/dashboard");
         } catch (err) {
             console.log(err);
         }

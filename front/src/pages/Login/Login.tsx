@@ -1,5 +1,5 @@
 
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { AiOutlineUser } from "react-icons/ai";
 import { PiPasswordBold } from "react-icons/pi";
@@ -19,9 +19,7 @@ import { LoginRegisterFormStyled } from "../../components/Form/LoginRegisterDiv/
 export const Login = () => {
     const { userLogin } = useContext(UsersContext);
 
-    const navigate = useNavigate();
-
-    const {register, handleSubmit, formState: {errors}} = useForm<ILoginData>();
+    const {register, handleSubmit} = useForm<ILoginData>();
 
     const submit: SubmitHandler<ILoginData> = async (data) => {
         userLogin(data);
