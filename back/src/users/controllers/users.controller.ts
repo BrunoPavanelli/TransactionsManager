@@ -1,9 +1,11 @@
 import { Response, Request } from "express";
 
+import schemas from "../schemas/users.schemas";
 import { UsersServices, usersService } from "../services/users.service";
 import {
 	TToken,
 	TTokenObject,
+	TUserLoggedResponse,
 	TUserRequest,
 	TUserResponse,
 	TUserUpdate,
@@ -45,11 +47,13 @@ class UsersControllers {
 
 	async findByToken(req: Request, res: Response): Promise<Response> {
 		const userId: string = res.locals.tokenData.id;
-		const userFind: TUserResponse = await this.usersServices.findById(
+		const userFind: TUserLoggedResponse = await this.usersServices.findById(
 			userId
 		);
+		
+		const userParsed: TUserLoggedResponse = schemas.responseLoggedUser.parse(userFind);
 
-		return res.json(userFind);
+		return res.json(userParsed);
 	}
 
 	async findByCpf(req: Request, res: Response): Promise<Response> {
@@ -57,7 +61,7 @@ class UsersControllers {
 		const userFind: TUserResponse = await this.usersServices.findByCpf(
 			userCpf
 		);
-
+		console.log(userFind);
 		return res.json(userFind);
 	}
 
