@@ -66,6 +66,9 @@ export const GlobalStyle = createGlobalStyle`
         --box-title-height: 5.875rem;
         --links-distance-line-to-text: 1.815rem;
         --post-height: 8rem;
+
+        --toastify-color-success: #74E5DA;
+        --toastify-color-error: #FC035D;
     }
 
     /* Utility-Classes */
