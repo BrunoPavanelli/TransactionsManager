@@ -1,6 +1,5 @@
 import { ReactNode } from "react";
-import { FieldErrors, UseFormRegisterReturn } from "react-hook-form";
-import { ILoginData, IRegisterData } from "../contexts/UsersContext/@usersTypes";
+import { UseFormRegisterReturn } from "react-hook-form";
 
 export interface IChildren {
     children: ReactNode;
