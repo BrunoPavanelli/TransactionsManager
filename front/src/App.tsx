@@ -1,7 +1,15 @@
-import "./App.css";
+import { AppStyled } from "./styles/AppStyled";
 
-function App() {
-	return <></>;
-}
+const App = () => {
+	return (
+		<>
+			<AppStyled>
+				<div>
+				  <h1>Vamos</h1>
+				</div>
+			</AppStyled>
+		</>
+	);
+};
 
 export default App;
