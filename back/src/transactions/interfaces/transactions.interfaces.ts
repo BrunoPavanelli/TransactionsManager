@@ -28,6 +28,8 @@ type TDateRange = {
     maxDate: number
 }
 
+type TValueRange = z.infer<typeof schemas.valueRange>
+
 export {
 	TTransactionResponse,
 	TTransactionRequest,
@@ -35,5 +37,6 @@ export {
 	TTransactionCreateInDb,
 	TSpreadSheetData,
 	TNoProducts,
-	TDateRange
+	TDateRange,
+	TValueRange
 };

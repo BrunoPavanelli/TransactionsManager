@@ -4,6 +4,7 @@ import {
 	TTransactionCreateInDb,
 	TTransactionResponse,
 	TTrasactionUpdate,
+	TValueRange,
 } from "../../interfaces/transactions.interfaces";
 import { TransactionsRepositories } from "../transactions.repositories";
 
@@ -75,6 +76,17 @@ export class KnexTransactionRepositories implements TransactionsRepositories {
 			.from("transactions")
 			.whereBetween(
 				"date", [dateRange.minDate, dateRange.maxDate]
+			);
+
+		return transactions;
+	}
+
+	async findByValueRange(valueRange: TValueRange): Promise<TTransactionResponse[]> {
+		const transactions: TTransactionResponse[] = await database
+			.select("*")
+			.from("transactions")
+			.whereBetween(
+				"value", [valueRange.minValue, valueRange.maxValue]
 			);
 
 		return transactions;

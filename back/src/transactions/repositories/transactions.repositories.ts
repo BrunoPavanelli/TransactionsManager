@@ -3,6 +3,7 @@ import {
 	TTransactionCreateInDb,
 	TTransactionResponse,
 	TTrasactionUpdate,
+	TValueRange,
 } from "../interfaces/transactions.interfaces";
 
 export abstract class TransactionsRepositories {
@@ -14,6 +15,7 @@ export abstract class TransactionsRepositories {
     abstract findByStatus(status: string): Promise<TTransactionResponse[]>;
     abstract findByProduct(product: string): Promise<TTransactionResponse[]>;
     abstract findByDateRange(dateRange: TDateRange): Promise<TTransactionResponse[]>;
+    abstract findByValueRange(valueRange: TValueRange): Promise<TTransactionResponse[]>;
     abstract updateById(
         trasactionId: number,
         transactionData: TTrasactionUpdate

@@ -72,6 +72,15 @@ class TransactionsController {
 		return res.json(transactions);
 	}
 
+	async findByValueRange(req: Request, res: Response): Promise<Response> {
+		const { minValue, maxValue } = req.body;
+
+		const transactions: TTransactionResponse[] =
+            await this.transactionsServices.findByValueRange({ minValue, maxValue });
+
+		return res.json(transactions);
+	}
+
 	async findByToken(req: Request, res: Response): Promise<Response> {
 		const { cpf } = res.locals.tokenData;
 		const transactions: TTransactionResponse[] =

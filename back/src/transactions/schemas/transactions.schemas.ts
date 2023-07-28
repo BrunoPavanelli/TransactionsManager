@@ -39,6 +39,11 @@ const dateRange = z.object({
 	dateRange: z.enum(["30 days", "90 days", "180 days", "1 year", "2 years", "5 years"])
 });
 
+const valueRange = z.object({
+	minValue: z.number(),
+	maxValue: z.number()
+});
+
 const schemas = {
 	transactions,
 	request,
@@ -48,7 +53,8 @@ const schemas = {
 	transactionsWithOutId,
 	status,
 	product,
-	dateRange
+	dateRange,
+	valueRange
 };
 
 export default schemas;

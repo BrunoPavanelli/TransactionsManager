@@ -16,6 +16,7 @@ import {
 	TTransactionRequest,
 	TTransactionResponse,
 	TTrasactionUpdate,
+	TValueRange,
 } from "../interfaces/transactions.interfaces";
 
 export class TransactionsServices {
@@ -234,6 +235,10 @@ export class TransactionsServices {
 		const dateRangeInTime = this.createMinAndMaxDate(dateRange);
 
 		return await this.transactionsRepositories.findByDateRange(dateRangeInTime);
+	}
+
+	async findByValueRange(valueRange: TValueRange): Promise<TTransactionResponse[]> {
+		return await this.transactionsRepositories.findByValueRange(valueRange);
 	}
 
 	async updateById(
