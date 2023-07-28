@@ -92,6 +92,20 @@ export class KnexTransactionRepositories implements TransactionsRepositories {
 		return transactions;
 	}
 
+	async findByTokenAndDateRange(dateRange: TDateRange, userId: string): Promise<TTransactionResponse[]> {
+		const transactions: TTransactionResponse[] = await database
+			.select("*")
+			.from("transactions")
+			.whereBetween(
+				"date", [dateRange.minDate, dateRange.maxDate]
+			)
+			.andWhere({
+				user_id: userId
+			});
+
+		return transactions;
+	}
+
 	async updateById(
 		trasactionId: string,
 		newTransactionData: TTrasactionUpdate

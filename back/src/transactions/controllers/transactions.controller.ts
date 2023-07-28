@@ -89,6 +89,15 @@ class TransactionsController {
 		return res.json(transactions);
 	}
 
+	async findByTokenAndDateRange(req: Request, res: Response): Promise<Response> {
+		const { cpf } = res.locals.tokenData;
+		const { dateRange } = req.body;
+
+		const transactions: TTransactionResponse[] = 
+			await this.transactionsServices.findByTokenAndDateRange(dateRange, cpf);
+		return res.json(transactions);
+	}
+
 	async updateById(req: Request, res: Response): Promise<Response> {
 		const transactionId: string = req.params.id;
 		const transactionData: TTrasactionUpdate = req.body;

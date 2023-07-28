@@ -20,6 +20,10 @@ transactions.get("/token", (req, res) =>
 	transactionsController.findByToken(req, res)
 );
 
+transactions.post("/token/date_range", (req, res) =>
+	transactionsController.findByTokenAndDateRange(req, res)
+);
+
 // Admin Routes
 transactions.use((req, res, next) =>
 	usersMiddlewares.verifyAdminRole(req, res, next)
