@@ -1,12 +1,14 @@
+import { Aside } from "./components/Aside/Aside";
+import { Main } from "./components/Main/Main";
 import { AppStyled } from "./styles/AppStyled";
+
 
 const App = () => {
 	return (
 		<>
 			<AppStyled>
-				<div>
-				  <h1>Vamos</h1>
-				</div>
+				<Aside/>
+				<Main/>
 			</AppStyled>
 		</>
 	);
