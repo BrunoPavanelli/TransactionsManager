@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 import { toast } from "react-toastify";
 
-import { ILoginData, IUser, IUserContext } from "./@usersTypes";
+import { ILoginData, IRegisterData, IUser, IUserContext } from "./@usersTypes";
 import { IChildren, IDecodedToken } from "../../@types/@globalTypes";
 import { api } from "../../service/api";
 
@@ -26,6 +26,17 @@ export const UsersProvider = ({children}: IChildren) => {
             toast.success("Succes!");
         } catch (err) {
             toast.error("Invalid Credentials!");
+            console.log(err);
+        }
+    };
+
+    const userRegister = async (registerData: IRegisterData) => {
+        try {
+            await api.post("/users", registerData);
+            navigate("/");
+
+            toast.success("Registered with Succes!");
+        } catch (err) {
             console.log(err);
         }
     };
@@ -60,7 +71,8 @@ export const UsersProvider = ({children}: IChildren) => {
                 userLogout,
                 user,
                 setUser,
-                retrieveUserData
+                retrieveUserData,
+                userRegister
             }}>
             {children}
         </UsersContext.Provider>
