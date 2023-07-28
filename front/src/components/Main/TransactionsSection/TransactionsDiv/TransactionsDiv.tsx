@@ -1,10 +1,10 @@
 import { useContext } from "react";
 import { TransactionsCard } from "../TransactionsCard/TransactionsCard";
 import { TransactionsDivStyled } from "./TransactionsDivStyled";
-import { UsersContext } from "../../../../contexts/UsersContext/UsersContext";
+import { TransactionsContext } from "../../../../contexts/TransactionsContext/transactionsContext";
 
 export const TransactionsDiv = () => {
-	const { transactions, convertTransactionData } = useContext(UsersContext);
+	const { transactions, convertTransactionData } = useContext(TransactionsContext);
 
 	return (
 		<TransactionsDivStyled className="container__page">

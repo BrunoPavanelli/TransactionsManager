@@ -1,0 +1,55 @@
+import { createContext, useState } from "react";
+import { toast } from "react-toastify";
+
+import { ITransaction, IUserContext } from "./@transactionsTypes";
+import { IChildren } from "../../@types/@globalTypes";
+import { api } from "../../service/api";
+
+export const TransactionsContext = createContext<IUserContext>({} as IUserContext);
+
+export const TransactionsProvider = ({children}: IChildren) => {
+    const [transactions, setTransactions] = useState<ITransaction[] | null>(null);
+
+    const retrieveUserTransactions = async () => {
+        const token = localStorage.getItem("@TransactionsM:Token");
+        try {
+            const { data } = await api.get("/transactions/token", {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            }); 
+            setTransactions(data);
+
+        } catch (error) {
+            toast.error("Some Error in Transactions req");
+            console.log(error);
+        }
+    };
+
+    const convertTransactionData = (transaction: ITransaction) => {
+        let date = new Date(transaction.date).toUTCString();
+        const [, day, monthString, year] = date.split(" ");
+        // eslint-disable-next-line no-sparse-arrays
+        date = [, day, monthString, year].join(" ");
+
+        const value= `$ ${(Number(transaction.value) / 100).toLocaleString()},00`;
+        
+        return {
+            ...transaction,
+            date: date,
+            value: value
+        };
+
+    };
+
+    return (
+        <TransactionsContext.Provider value={{
+                transactions,
+                setTransactions,
+                retrieveUserTransactions,
+                convertTransactionData,
+            }}>
+            {children}
+        </TransactionsContext.Provider>
+    );
+};

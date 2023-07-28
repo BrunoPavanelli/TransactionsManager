@@ -7,6 +7,7 @@ import { Register } from "../pages/Register/Register";
 import { UserDash } from "../pages/UserDash/UserDash";
 import { AdminDash } from "../pages/AdminDash/AdminDash";
 import { AdminRoutes } from "./Outlets/AdminRoutes";
+import { TransactionsProvider } from "../contexts/TransactionsContext/transactionsContext";
 
 export const AppRoutes = () => {
 	return (
@@ -15,10 +16,10 @@ export const AppRoutes = () => {
 				<Route index element={<Login />}/>
 				<Route path="/register" element={<Register />}/>
 			</Route>
-			<Route path="/dashboard" element={<ProtectedRoutes />}>
+			<Route path="/dashboard" element={<TransactionsProvider><ProtectedRoutes /></TransactionsProvider>}>
 				<Route index element={<UserDash />}/>
 			</Route>
-			<Route path="/admin" element={<AdminRoutes />}>
+			<Route path="/admin" element={<TransactionsProvider><AdminRoutes /></TransactionsProvider>}>
 				<Route index element={<AdminDash />}/>
 			</Route>
 		</Routes>

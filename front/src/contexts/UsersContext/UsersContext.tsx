@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 import { toast } from "react-toastify";
 
-import { ILoginData, ITransaction, IUser, IUserContext } from "./@usersTypes";
+import { ILoginData, IUser, IUserContext } from "./@usersTypes";
 import { IChildren, IDecodedToken } from "../../@types/@globalTypes";
 import { api } from "../../service/api";
 
@@ -11,7 +11,6 @@ export const UsersContext = createContext<IUserContext>({} as IUserContext);
 
 export const UsersProvider = ({children}: IChildren) => {
     const [user, setUser] = useState<IUser | null>(null);
-    const [transactions, setTransactions] = useState<ITransaction[] | null>(null);
 
     const navigate = useNavigate();
 
@@ -55,49 +54,13 @@ export const UsersProvider = ({children}: IChildren) => {
         }       
     };
 
-    const retrieveUserTransactions = async () => {
-        const token = localStorage.getItem("@TransactionsM:Token");
-        try {
-            const { data } = await api.get("/transactions/token", {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            }); 
-            setTransactions(data);
-
-        } catch (error) {
-            toast.error("Some Error in Transactions req");
-            console.log(error);
-        }
-    };
-
-    const convertTransactionData = (transaction: ITransaction) => {
-        let date = new Date(transaction.date).toUTCString();
-        const [, day, monthString, year] = date.split(" ");
-        // eslint-disable-next-line no-sparse-arrays
-        date = [, day, monthString, year].join(" ");
-
-        const value= `$ ${(Number(transaction.value) / 100).toLocaleString()},00`;
-        
-        return {
-            ...transaction,
-            date: date,
-            value: value
-        };
-
-    };
-
     return (
         <UsersContext.Provider value={{
                 userLogin, 
                 userLogout,
                 user,
                 setUser,
-                retrieveUserData,
-                transactions,
-                setTransactions,
-                retrieveUserTransactions,
-                convertTransactionData,
+                retrieveUserData
             }}>
             {children}
         </UsersContext.Provider>

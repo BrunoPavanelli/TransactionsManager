@@ -1,4 +1,4 @@
-import { ITransaction } from "../../../../contexts/UsersContext/@usersTypes";
+import { ITransaction } from "../../../../contexts/TransactionsContext/@transactionsTypes";
 import { TransactionsCardStyled } from "./TransactionsCardStyled";
 
 interface ITransactionsCardProps {
