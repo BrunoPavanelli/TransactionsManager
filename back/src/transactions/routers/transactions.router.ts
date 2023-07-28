@@ -41,31 +41,31 @@ transactions.get(
 	(req, res) => transactionsController.findAll(req, res)
 );
 
-transactions.get(
+transactions.post(
 	"/cpf",
 	(req, res, next) => usersMiddlewares.verifyByCpf(req, res, next),
 	(req, res) => transactionsController.findByCpfUser(req, res)
 );
 
-transactions.get(
+transactions.post(
 	"/status",
 	sharedMiddlewares.validateSchema(schemas.status),
 	(req, res) => transactionsController.findByStatus(req, res)
 );
 
-transactions.get(
+transactions.post(
 	"/product",
 	sharedMiddlewares.validateSchema(schemas.product),
 	(req, res) => transactionsController.findByProduct(req, res)
 );
 
-transactions.get(
+transactions.post(
 	"/date_range",
 	sharedMiddlewares.validateSchema(schemas.dateRange),
 	(req, res) => transactionsController.findByDateRange(req, res)
 );
 
-transactions.get(
+transactions.post(
 	"/value_range",
 	sharedMiddlewares.validateSchema(schemas.valueRange),
 	(req, res) => transactionsController.findByValueRange(req, res)

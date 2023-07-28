@@ -61,7 +61,7 @@ class UsersControllers {
 		const userFind: TUserResponse = await this.usersServices.findByCpf(
 			userCpf
 		);
-		console.log(userFind);
+
 		return res.json(userFind);
 	}
 
