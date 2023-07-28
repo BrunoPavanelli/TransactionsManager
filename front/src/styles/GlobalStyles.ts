@@ -14,6 +14,8 @@ export const Reset = createGlobalStyle`
         -webkit-box-sizing: border-box;
         box-sizing: border-box;
 
+        font-family: var(--ff-Kanit);
+
         button {
             cursor: pointer;
         }
@@ -99,54 +101,54 @@ export const GlobalStyle = createGlobalStyle`
         font-family: var(--ff-Kanit);
     }
 
-    .fw-400 {
+    .fw__400 {
         font-weight: var(--fw-400);
     }
 
-    .fw-500 {
+    .fw__500 {
         font-weight: var(--fw-500);
     }
 
-    .fw-600 {
+    .fw__600 {
         font-weight: var(--fw-600);
     }
 
-    .fw-700 {
+    .fw__700 {
         font-weight: var(--fw-700);
     }
 
-    .fs-10 {
+    .fs__10 {
         font-size: var(--fs-10);
     }
 
-    .fs-16 {
+    .fs__16 {
         font-size: var(--fs-16);
     }
 
-    .fs-19 {
+    .fs__19 {
         font-size: var(--fs-19);
     }
 
-    .fs-20 {
+    .fs__20 {
         font-size: var(--fs-20);
     }
 
-    .fs-25 {
+    .fs__25 {
         font-size: var(--fs-25);
     }
 
-    .fs-29 {
+    .fs__29 {
         font-size: var(--fs-29);
     }
 
-    .fs-30 {
+    .fs__30 {
         font-size: var(--fs-30);
     }
 
-    .fs-50 {
+    .fs__50 {
         font-size: var(--fs-50);
     }
-    
+
     /* Colors */
     .white__text {
         color: var(--white);
@@ -166,5 +168,10 @@ export const GlobalStyle = createGlobalStyle`
 
     .blue__white__text {
         color: var(--primary-white-blue);
+    }
+
+    /* Letter Spacing */
+    .letterspace__header {
+        letter-spacing: 0.125rem;
     }
 `;
