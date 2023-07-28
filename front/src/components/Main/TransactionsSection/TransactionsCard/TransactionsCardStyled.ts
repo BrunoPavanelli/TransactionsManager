@@ -4,5 +4,18 @@ export const TransactionsCardStyled = styled.li`
     width: 100%;
     min-height: 150px;
 
-    border: 2px solid gainsboro;
+    background-color: var(--black-2);
+
+
+    border-radius: var(--br-8);
+
+    padding-inline: 2rem;
+    
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    p {
+        color: var(--secondary-white-blue);
+    }
 `;

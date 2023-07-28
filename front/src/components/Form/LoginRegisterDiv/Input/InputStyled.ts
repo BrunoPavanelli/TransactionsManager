@@ -10,6 +10,7 @@ export const InputDivStyled = styled.div`
     border-radius: var(--br-8);
     
     display: flex;
+    position: relative;
 `;
 
 export const InputIconDivStyled = styled.div`

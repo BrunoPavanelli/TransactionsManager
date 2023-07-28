@@ -13,6 +13,7 @@ export interface IInput extends IChildren {
     placeholder: string;
     type: string;
     register: UseFormRegisterReturn<string>;
+    errors?: string
 }
 
 export interface IDecodedToken {
