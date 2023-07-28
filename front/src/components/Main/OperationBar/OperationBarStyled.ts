@@ -7,8 +7,6 @@ export const OperationBarStyled = styled.div`
     background: rgb(59,65,72);
     background: linear-gradient(90deg, rgba(59,65,72,1) 0%, rgba(2,14,19,0.75) 37%, rgba(116,229,218,0.60) 100%);
 
-  
-
     border-bottom: 2px solid black;
 
     display: flex;
