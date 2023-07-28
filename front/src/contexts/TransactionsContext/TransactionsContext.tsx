@@ -8,7 +8,8 @@ import { api } from "../../service/api";
 export const TransactionsContext = createContext<IUserContext>({} as IUserContext);
 
 export const TransactionsProvider = ({children}: IChildren) => {
-    const [transactions, setTransactions] = useState<ITransaction[] | null>(null);
+    const [transactions, setTransactions] = useState<ITransaction[]>([]);
+    const [filteredTransactions, setFilteredTransactions] = useState<ITransaction[]>([]);
 
     const retrieveUserTransactions = async () => {
         const token = localStorage.getItem("@TransactionsM:Token");
@@ -42,12 +43,19 @@ export const TransactionsProvider = ({children}: IChildren) => {
 
     };
 
+    const filterTransactions = (status: string): void => {
+        const filteredTransactions = transactions!.filter(transaction => transaction.status === status);
+        status === "Status" ? setFilteredTransactions(transactions) : setFilteredTransactions(filteredTransactions);
+    };
+
     return (
         <TransactionsContext.Provider value={{
                 transactions,
                 setTransactions,
                 retrieveUserTransactions,
                 convertTransactionData,
+                filteredTransactions,
+                filterTransactions
             }}>
             {children}
         </TransactionsContext.Provider>

@@ -1,20 +1,10 @@
 export interface IUserContext {
     retrieveUserTransactions: () => Promise<void>,
-    transactions: ITransaction[] | null,
-    setTransactions: React.Dispatch<React.SetStateAction<ITransaction[] | null>>
+    transactions: ITransaction[],
+    setTransactions: React.Dispatch<React.SetStateAction<ITransaction[]>>
     convertTransactionData: (transaction: ITransaction) => ITransaction,
-}
-
-export interface IUser {
-    id: string,
-    email: string,
-    username: string,
-    role: string,
-}
-
-export interface ILoginData {
-    email: string,
-    password: string
+    filteredTransactions: ITransaction[],
+    filterTransactions: (status: string) => void
 }
 
 export interface ITransaction 	{
