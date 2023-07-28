@@ -1,6 +1,4 @@
-// import { Aside } from "./components/Aside/Aside";
-// import { Main } from "./components/Main/Main";
-import { Login } from "./pages/Login/Login";
+import { AppRoutes } from "./routes/Routes";
 import { AppStyled } from "./styles/AppStyled";
 import { Reset, GlobalStyle } from "./styles/GlobalStyles";
 
@@ -11,7 +9,7 @@ const App = () => {
 			<Reset/>
 			<GlobalStyle/>
 			<AppStyled>
-				<Login/>
+				<AppRoutes/>
 			</AppStyled>
 		</>
 	);

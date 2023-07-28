@@ -6,24 +6,26 @@ import { LoginRegisterDiv } from "../../components/Form/LoginRegisterDiv/LoginRe
 import { LoginRegisterForm } from "../../components/Form/LoginRegisterDiv/LoginRegisterForm/LoginRegisterForm";
 import { Header } from "../../components/Header/Header";
 import { Main } from "../../components/Main/Main";
-import { LoginStyled } from "./LoginStyled";
+import { RegisterStyled } from "./RegisterStyled";
 
-export const Login = () => {
+export const Register = () => {
     const navigate = useNavigate();
-
+    
     return (
-        <LoginStyled>
+        <RegisterStyled>
             <Header/>
             <Main>
                 <LoginRegisterDiv>
                     <LoginRegisterForm>
                         <Input/>
                         <Input/>
-                        <ButtonStyled onClick={() => navigate("/dashboard")}>Login</ButtonStyled>
-                        <h2 className="black__text">Not a member? <Link className="white__text" to="/register">Sign up now</Link></h2>
+                        <Input/>
+                        <Input/>
+                        <ButtonStyled onClick={() => navigate("/")}>Register</ButtonStyled>
+                        <h2 className="black__text">Already a member? <Link className="white__text" to="/">Login</Link></h2>
                     </LoginRegisterForm>
                 </LoginRegisterDiv>
             </Main>
-        </LoginStyled>
+        </RegisterStyled>
     );
 };
