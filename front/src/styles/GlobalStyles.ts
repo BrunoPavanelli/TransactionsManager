@@ -24,6 +24,7 @@ export const GlobalStyle = createGlobalStyle`
     :root {
         /* Colors */
         --white: #fff;
+        --black-0: #020e13;
         --black: #2D3338;
         --black-2: #353B40;
         --black-3: #3B4148;
@@ -100,11 +101,15 @@ export const GlobalStyle = createGlobalStyle`
      }
 
     /* Texts */
-     .white__text {
+    .white__text {
         color: var(--white);
-     }
+    }
 
-    .black__text {
+    .black__text0 {
+        color: var(--black-0);
+    }
+
+    .black__text2 {
         color: var(--black-3);
     }
 

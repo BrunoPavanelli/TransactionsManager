@@ -1,8 +1,14 @@
-import { InputStyled } from "./InputStyled";
+import { InputDivStyled, InputIconDivStyled, InputStyled } from "./InputStyled";
+import { IInput } from "../../../../@types/@globalTypes";
 
-export const Input = () => {
+export const Input = ({children, placeholder}: IInput) => {
     return (
-        <InputStyled>
-        </InputStyled>
+        <InputDivStyled>
+            <InputIconDivStyled>
+                { children }
+            </InputIconDivStyled>
+            <InputStyled placeholder={placeholder}>
+            </InputStyled>
+        </InputDivStyled>
     );
 };
