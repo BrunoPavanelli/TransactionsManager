@@ -23,8 +23,13 @@ export const UsersProvider = ({children}: IChildren) => {
         }
     };
 
+    const userLogout = () => {
+        localStorage.removeItem("@TransactionsM:Token");
+        navigate("/");
+    };
+
     return (
-        <UsersContext.Provider value={{userLogin}}>
+        <UsersContext.Provider value={{userLogin, userLogout}}>
             {children}
         </UsersContext.Provider>
     );
