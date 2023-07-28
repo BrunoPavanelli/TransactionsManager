@@ -1,16 +1,20 @@
 import { styled } from "styled-components";
 
 export const LoginRegisterFormStyled = styled.form`
-    width: 100%;
+    width: 80%;
+    max-width: 900px;
     height: 100%;
 
     box-sizing: border-box;
-    /* border: 2px solid beige; */
-    padding: 4rem;
+    padding: 8rem;
 
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 1rem;
+
+    @media (max-width: 880px) {
+        padding: 0;
+    }
 `;

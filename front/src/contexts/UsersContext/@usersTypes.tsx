@@ -1,5 +1,6 @@
 export interface IUserContext {
     userLogin: (data: ILoginData) => Promise<void>,
+    userLogout: () => void;
 }
 
 export interface IUser {
