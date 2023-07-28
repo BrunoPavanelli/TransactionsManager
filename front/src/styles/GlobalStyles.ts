@@ -71,8 +71,8 @@ export const GlobalStyle = createGlobalStyle`
     /* Utility-Classes */
     /* Container */
     .container__page {
-        min-width: 80%;
-        max-width: 1000px;
+        width: 80%;
+        max-width: 1500px;
         height: 100%;
     }
     .container__pages--forms {

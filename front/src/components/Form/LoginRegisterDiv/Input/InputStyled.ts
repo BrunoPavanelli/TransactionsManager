@@ -24,6 +24,10 @@ export const InputIconDivStyled = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+
+    @media (max-width: 880px) {
+        display: none;
+    }
 `;
 
 export const InputStyled = styled.input`
