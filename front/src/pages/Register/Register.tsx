@@ -21,29 +21,27 @@ export const Register = () => {
             <Header />
             <Main>
                 <LoginRegisterFormStyled>
-                    <form>
-                        {/* <Input placeholder="username: John Doe">
-                            <MdDriveFileRenameOutline size={30} />
-                        </Input>
-                        <Input placeholder="document: 123.456.78-00">
-                            <HiIdentification size={30} />
-                        </Input>
-                        <Input placeholder="email: user@mail.com">
-                            <AiOutlineUser size={30} />
-                        </Input>
-                        <Input placeholder="password: ******">
-                            <PiPasswordBold size={30} />
-                        </Input> */}
-                        <ButtonStyled onClick={() => navigate("/")}>
-                            Register
-                        </ButtonStyled>
-                        <h2 className="black__text2">
-                            Already a member?{" "}
-                            <Link className="white__text" to="/">
-                                Login
-                            </Link>
-                        </h2>
-                    </form>
+                    {/* <Input placeholder="username: John Doe">
+                        <MdDriveFileRenameOutline size={30} />
+                    </Input>
+                    <Input placeholder="document: 123.456.78-00">
+                        <HiIdentification size={30} />
+                    </Input>
+                    <Input placeholder="email: user@mail.com">
+                        <AiOutlineUser size={30} />
+                    </Input>
+                    <Input placeholder="password: ******">
+                        <PiPasswordBold size={30} />
+                    </Input> */}
+                    <ButtonStyled onClick={() => navigate("/")}>
+                        Register
+                    </ButtonStyled>
+                    <h2 className="black__text2">
+                        Already a member?{" "}
+                        <Link className="white__text" to="/">
+                            Login
+                        </Link>
+                    </h2>
                 </LoginRegisterFormStyled>
             </Main>
         </RegisterStyled>
