@@ -4,12 +4,22 @@ import { FaWallet } from "react-icons/fa";
 import { OperationBarDivStyled, OperationBarStyled } from "./OperationBarStyled";
 import { SelectStyled } from "./Select/SelectStyled";
 import { UsersContext } from "../../../contexts/UsersContext/UsersContext";
+// import { TransactionsContext } from "../../../contexts/TransactionsContext/TransactionsContext";
+import { AiOutlineSearch } from "react-icons/ai";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { IUserSearchData } from "../../../contexts/TransactionsContext/@transactionsTypes";
 import { TransactionsContext } from "../../../contexts/TransactionsContext/TransactionsContext";
 
 
 export const OperationBar = () => {
     const { retrieveUserData, user } = useContext(UsersContext);
-    const { filterTransactionsByStatus } = useContext(TransactionsContext);
+    const { filterTransactions } = useContext(TransactionsContext);
+
+    const {handleSubmit, register} = useForm<IUserSearchData>();
+
+    const submit: SubmitHandler<IUserSearchData> = (data) => {
+        filterTransactions(data);
+    };
 
     useEffect(() => {
         retrieveUserData();
@@ -19,30 +29,30 @@ export const OperationBar = () => {
         <OperationBarStyled>
             <OperationBarDivStyled className="container__page">
                 <h2 className="black__text0 fw__400 fs__25 letterspace__header desktop">Welcome<span className="blue__white__text"> {user?.username}!</span></h2>
-                <div className="navbar">
-                    <SelectStyled onChange={(e) => {
-                        console.log(e.target.value);
-                        filterTransactionsByStatus(e.target.value);
-                        }}>
-                        <option value="Status">Date</option>
-                        <option value="In Analysis">1 Month</option>
-                        <option value="Approved">3 Months</option>
-                        <option value="Reproved">6 Months</option>
-                        <option value="In Analysis">1 Year</option>
-                        <option value="Approved">2 Years</option>
-                        <option value="Reproved">5 Years</option>
+                <form className="navbar" onSubmit={handleSubmit(submit)}>
+                    <SelectStyled {...register("date")}>
+                        <option value="Date">Date</option>
+                        <option value="30 days">1 Month</option>
+                        <option value="90 days">3 Months</option>
+                        <option value="180 days">6 Months</option>
+                        <option value="1 year">1 Year</option>
+                        <option value="2 years">2 Years</option>
+                        <option value="5 years">5 Years</option>
                     </SelectStyled>
-                    <SelectStyled onChange={(e) => {
-                        console.log(e.target.value);
-                        filterTransactionsByStatus(e.target.value);
-                        }}>
+
+                    <SelectStyled {...register("status")} >
                         <option value="Status">Status</option>
                         <option value="In Analysis">In Analysis</option>
                         <option value="Approved">Approved</option>
                         <option value="Reproved">Reproved</option>
                     </SelectStyled>
-					<FaWallet size={30} className="wallet"/>
-				</div>
+                    <button className="bar__btn">
+                        <AiOutlineSearch size={30} />
+                    </button>
+                    <button className="bar__btn">
+					    <FaWallet size={30} />
+                    </button>
+				</form>
             </OperationBarDivStyled>
         </OperationBarStyled>
     );

@@ -21,8 +21,9 @@ export const OperationBarStyled = styled.div`
         align-items: center;
         gap: 1rem;
 
-        .wallet {
+        .bar__btn {
             cursor: pointer;
+            background-color: transparent;
         }
     }
 `;

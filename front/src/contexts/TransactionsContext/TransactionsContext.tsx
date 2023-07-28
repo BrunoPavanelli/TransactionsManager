@@ -1,7 +1,7 @@
 import { createContext, useState } from "react";
 import { toast } from "react-toastify";
 
-import { ITransaction, IUserContext } from "./@transactionsTypes";
+import { ITransaction, IUserContext, IUserSearchData } from "./@transactionsTypes";
 import { IChildren } from "../../@types/@globalTypes";
 import { api } from "../../service/api";
 
@@ -10,11 +10,12 @@ export const TransactionsContext = createContext<IUserContext>({} as IUserContex
 export const TransactionsProvider = ({children}: IChildren) => {
     const [transactions, setTransactions] = useState<ITransaction[]>([]);
     const [filteredTransactions, setFilteredTransactions] = useState<ITransaction[]>([]);
+    // const [filteredByDateTransactions, setFilteredByDateTransactions] = useState<ITransaction[]>([]);
 
     const retrieveUserTransactions = async () => {
         const token = localStorage.getItem("@TransactionsM:Token");
         try {
-            const { data } = await api.get("/transactions/token", {
+            const { data } = await api.get<ITransaction[]>("/transactions/token", {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
@@ -43,34 +44,57 @@ export const TransactionsProvider = ({children}: IChildren) => {
 
     };
 
-    const filterTransactionsByStatus = (status: string): void => {
-        const filteredTransactions = transactions!.filter(transaction => transaction.status === status);
-        status === "Status" ? setFilteredTransactions(transactions) : setFilteredTransactions(filteredTransactions);
+    const filterTransactionsByDate = async (dateRange: string): Promise<ITransaction[] | void> => {
+        const token = localStorage.getItem("@TransactionsM:Token");
+        const dateRangeObject = {
+            dateRange: dateRange
+        };
+
+        if (dateRange === "Date") {
+            setFilteredTransactions([]);
+            return;
+        }
+
+        try {
+            const { data } = await api.post<ITransaction[]>("/transactions/token/date_range", dateRangeObject, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            }); 
+
+            return data;
+        } catch (error) {
+            toast.error("Some Error in Transactions Filter By Date req");
+            console.log(error);
+        }        
     };
 
-    // const filterTransactionsByDate = async (dateRange: string): Promise<void> => {
-    //     if (dateRange === "Date") {
-    //         setTransactions(transactions);
-    //         return;
-    //     }
+    const filterTransactions = async (searchData: IUserSearchData): Promise<void>=> {
+        if (searchData.status === "Status") {
+            const filteredTransactions = await filterTransactionsByDate(searchData.date);
+            filteredTransactions ? setFilteredTransactions(filteredTransactions) : setFilteredTransactions([]);
+            return;
+        }
 
-    //     const token = localStorage.getItem("@TransactionsM:Token");
-    //     try {
-    //         const { data } = await api.get("transactions/date_range", {
-    //             data: {
-    //                 dateRange: dateRange
-    //             },
-    //             headers: {
-    //                 Authorization: `Bearer ${token}`
-    //             }
-    //         }); 
-    //         setTransactions(data);
+        if (searchData.date === "Date") {
+            filterTransactionsByStatus(searchData.status, transactions);
+            return;
+        }
 
-    //     } catch (error) {
-    //         toast.error("Some Error in Transactions Filter By Date req");
-    //         console.log(error);
-    //     }        
-    // };
+        const filteredTransactions = await filterTransactionsByDate(searchData.date);
+        filterTransactionsByStatus(searchData.status, filteredTransactions!);
+        return;
+    };
+
+    const filterTransactionsByStatus = (status: string, transactionsList: ITransaction[]): void => {
+        const filteredTransactions = transactionsList.filter(transaction => transaction.status === status);
+
+        if (filteredTransactions.length === 0) {
+            toast.warning("Any Transactions for that search!");
+        }
+        
+        setFilteredTransactions(filteredTransactions);
+    };
 
     return (
         <TransactionsContext.Provider value={{
@@ -79,7 +103,7 @@ export const TransactionsProvider = ({children}: IChildren) => {
                 retrieveUserTransactions,
                 convertTransactionData,
                 filteredTransactions,
-                filterTransactionsByStatus
+                filterTransactions
             }}>
             {children}
         </TransactionsContext.Provider>
