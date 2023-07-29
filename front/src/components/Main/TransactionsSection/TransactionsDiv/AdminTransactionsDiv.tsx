@@ -6,7 +6,7 @@ import { AdminTransactionsContext } from "../../../../contexts/TransactionsConte
 import { TransactionsContext } from "../../../../contexts/TransactionsContext/TransactionsContext";
 
 export const AdminTransactionsDiv = () => {
-	const { allTransactions } = useContext(AdminTransactionsContext);
+	const { allTransactions, filteredTransactions } = useContext(AdminTransactionsContext);
 	const { convertTransactionData } = useContext(TransactionsContext);
 	
 	return (
@@ -21,12 +21,17 @@ export const AdminTransactionsDiv = () => {
 			</div>
 			<ul>
 				{
-					allTransactions.map(transaction => {
+					filteredTransactions.length === 0 
+					? allTransactions.map(transaction => {
 						transaction = convertTransactionData(transaction);
 					
 						return <TransactionsCard transaction={transaction} key={transaction.id}/>;
 					})
-				
+					: filteredTransactions.map(transaction => {
+						transaction = convertTransactionData(transaction);
+					
+						return <TransactionsCard transaction={transaction} key={transaction.id}/>;
+					})
 				}
 			</ul>
 		</TransactionsDivStyled>
