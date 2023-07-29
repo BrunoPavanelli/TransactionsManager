@@ -1,4 +1,5 @@
 import { Knex } from "knex";
+import { hashSync } from "bcryptjs";
 
 export async function seed(knex: Knex): Promise<void> {
 	// Deletes ALL existing entries
@@ -10,7 +11,7 @@ export async function seed(knex: Knex): Promise<void> {
 		return {
 			username: `common${i}`,
 			email: `common${i}@mail.com`,
-			password: "1234",
+			password: hashSync("1234", 10),
 			cpf: `${i}23.423.974-01`,
 			role: "common"  
 		};
@@ -19,7 +20,7 @@ export async function seed(knex: Knex): Promise<void> {
 	const admin = [{
 		username: "admin",
 		email: "admin@mail.com",
-		password: "1234",
+		password: hashSync("1234", 10),
 		cpf: "282.279.300-01",
 		role: "admin"        
 	}];
