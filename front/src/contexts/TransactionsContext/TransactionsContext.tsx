@@ -1,30 +1,77 @@
-import { createContext, useState } from "react";
+import { createContext, useContext, useState } from "react";
 import { toast } from "react-toastify";
 
-import { ITransaction, IUserContext } from "./@transactionsTypes";
+import { ISubtotal, ITransaction, IUserContext, IUserSearchData } from "./@transactionsTypes";
 import { IChildren } from "../../@types/@globalTypes";
 import { api } from "../../service/api";
+import { UsersContext } from "../UsersContext/UsersContext";
 
 export const TransactionsContext = createContext<IUserContext>({} as IUserContext);
 
 export const TransactionsProvider = ({children}: IChildren) => {
+    const { userLogout } = useContext(UsersContext);
+
     const [transactions, setTransactions] = useState<ITransaction[]>([]);
+    const [allTransactions, setAllTransactions] = useState<ITransaction[]>([]);
     const [filteredTransactions, setFilteredTransactions] = useState<ITransaction[]>([]);
+    const [approvedTransactionsSubtotal, setApprovedTransactionsSubtotal] = useState<ISubtotal | null>(null);
+    const [openModal, setOpenModal] = useState<boolean>(false);
+
+    const retrieveAllTransactions = async () => {
+        const token = localStorage.getItem("@TransactionsM:Token");
+        try {
+            const { data } = await api.get<ITransaction[]>("/transactions", {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+
+            setAllTransactions(data);
+        } catch (error) {
+            toast.warning("Please, login again :)");
+            console.log(error);
+            userLogout();
+        }
+    };
 
     const retrieveUserTransactions = async () => {
         const token = localStorage.getItem("@TransactionsM:Token");
         try {
-            const { data } = await api.get("/transactions/token", {
+            const { data } = await api.get<ITransaction[]>("/transactions/token", {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
-            }); 
+            });
+
             setTransactions(data);
+        } catch (error) {
+            toast.warning("Please, login again :)");
+            console.log(error);
+            userLogout();
+        }
+    };
+
+    const retrieveSubtotalUserApprovedTransactions = async () => {
+        const token = localStorage.getItem("@TransactionsM:Token");
+        try {
+            let { data } = await api.get<ISubtotal>("transactions/token/subtotal", {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+
+            const value: string = `$ ${Number(data.subtotal).toLocaleString()},00`; 
+            data = {
+                subtotal: value
+            };
+
+            setApprovedTransactionsSubtotal(data);
 
         } catch (error) {
-            toast.error("Some Error in Transactions req");
+            toast.warning("Please, login again :)");
             console.log(error);
-        }
+            userLogout();
+        }        
     };
 
     const convertTransactionData = (transaction: ITransaction) => {
@@ -43,43 +90,72 @@ export const TransactionsProvider = ({children}: IChildren) => {
 
     };
 
-    const filterTransactionsByStatus = (status: string): void => {
-        const filteredTransactions = transactions!.filter(transaction => transaction.status === status);
-        status === "Status" ? setFilteredTransactions(transactions) : setFilteredTransactions(filteredTransactions);
+    const filterTransactionsByDate = async (dateRange: string): Promise<ITransaction[] | void> => {
+        const token = localStorage.getItem("@TransactionsM:Token");
+        const dateRangeObject = {
+            dateRange: dateRange
+        };
+
+        if (dateRange === "Date") {
+            setFilteredTransactions([]);
+            return;
+        }
+
+        try {
+            const { data } = await api.post<ITransaction[]>("/transactions/token/date_range", dateRangeObject, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            }); 
+
+            return data;
+        } catch (error) {
+            console.log(error);
+        }        
     };
 
-    // const filterTransactionsByDate = async (dateRange: string): Promise<void> => {
-    //     if (dateRange === "Date") {
-    //         setTransactions(transactions);
-    //         return;
-    //     }
+    const filterTransactions = async (searchData: IUserSearchData): Promise<void>=> {
+        if (searchData.status === "Status") {
+            const filteredTransactions = await filterTransactionsByDate(searchData.date);
+            filteredTransactions ? setFilteredTransactions(filteredTransactions) : setFilteredTransactions([]);
+            return;
+        }
 
-    //     const token = localStorage.getItem("@TransactionsM:Token");
-    //     try {
-    //         const { data } = await api.get("transactions/date_range", {
-    //             data: {
-    //                 dateRange: dateRange
-    //             },
-    //             headers: {
-    //                 Authorization: `Bearer ${token}`
-    //             }
-    //         }); 
-    //         setTransactions(data);
+        if (searchData.date === "Date") {
+            filterTransactionsByStatus(searchData.status, transactions);
+            return;
+        }
 
-    //     } catch (error) {
-    //         toast.error("Some Error in Transactions Filter By Date req");
-    //         console.log(error);
-    //     }        
-    // };
+        const filteredTransactions = await filterTransactionsByDate(searchData.date);
+        filterTransactionsByStatus(searchData.status, filteredTransactions!);
+        return;
+    };
+
+    const filterTransactionsByStatus = (status: string, transactionsList: ITransaction[]): void => {
+        const filteredTransactions = transactionsList.filter(transaction => transaction.status === status);
+
+        if (filteredTransactions.length === 0) {
+            toast.warning("Any Transactions for that search!");
+        }
+        
+        setFilteredTransactions(filteredTransactions);
+    };
 
     return (
         <TransactionsContext.Provider value={{
                 transactions,
                 setTransactions,
+                allTransactions,
+                setAllTransactions,
                 retrieveUserTransactions,
+                retrieveAllTransactions,
                 convertTransactionData,
                 filteredTransactions,
-                filterTransactionsByStatus
+                filterTransactions,
+                openModal,
+                setOpenModal,
+                approvedTransactionsSubtotal,
+                retrieveSubtotalUserApprovedTransactions
             }}>
             {children}
         </TransactionsContext.Provider>

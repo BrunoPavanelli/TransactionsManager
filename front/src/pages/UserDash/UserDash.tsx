@@ -6,22 +6,24 @@ import { UserDashStyled } from "./UserDashStyled";
 import { UsersContext } from "../../contexts/UsersContext/UsersContext";
 import { OperationBar } from "../../components/Main/OperationBar/OperationBar";
 import { TransactionsSection } from "../../components/Main/TransactionsSection/TransactionsSection";
-import { TransactionsContext } from "../../contexts/TransactionsContext/transactionsContext";
+import { TransactionsContext } from "../../contexts/TransactionsContext/TransactionsContext";
+import { TransactionsDiv } from "../../components/Main/TransactionsSection/TransactionsDiv/TransactionsDiv";
 
 export const UserDash = () => {
     const { userLogout, retrieveUserData } = useContext(UsersContext);
-    const { retrieveUserTransactions } = useContext(TransactionsContext);
+    const { retrieveUserTransactions, retrieveSubtotalUserApprovedTransactions } = useContext(TransactionsContext);
 
     useEffect(() => {
         retrieveUserData();
         retrieveUserTransactions();
+        retrieveSubtotalUserApprovedTransactions();
     }, []);
 
     return (
         <UserDashStyled>
             <Header children={<CiLogout className="logout" size={32} onClick={userLogout}/>}/>
             <OperationBar/>
-            <TransactionsSection/>
+            <TransactionsSection children={<TransactionsDiv />} role="common"/>
         </UserDashStyled>
     );
 };
