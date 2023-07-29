@@ -1,7 +1,10 @@
 export interface IUserContext {
     retrieveUserTransactions: () => Promise<void>,
+    retrieveAllTransactions: () => Promise<void>,
     transactions: ITransaction[],
     setTransactions: React.Dispatch<React.SetStateAction<ITransaction[]>>
+    allTransactions: ITransaction[],
+    setAllTransactions: React.Dispatch<React.SetStateAction<ITransaction[]>>
     convertTransactionData: (transaction: ITransaction) => ITransaction,
     filteredTransactions: ITransaction[],
     filterTransactions: (searchData: IUserSearchData) => Promise<void>,

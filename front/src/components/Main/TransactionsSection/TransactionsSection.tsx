@@ -1,17 +1,22 @@
-import { TransactionsDiv } from "./TransactionsDiv/TransactionsDiv";
+import { IChildren } from "../../../@types/@globalTypes";
 import { TransactionsSectionStyled } from "./TransactionsSectionStyled";
 
-export const TransactionsSection = () => {
+interface ITransactionsSection extends IChildren {
+	role: string
+}
+
+export const TransactionsSection = ({children, role}: ITransactionsSection) => {
 	return (
 		<TransactionsSectionStyled>
 			<div className="header">
+				{role === "admin" ? <p>User</p> : null}
 				<p>Description</p>
 				<p>Date</p>
 				<p>Value in Points</p>
 				<p>Value</p>
 				<p>Status</p>
 			</div>
-			<TransactionsDiv/>
+			{children}
 		</TransactionsSectionStyled>
 	);
 };

@@ -12,9 +12,27 @@ export const TransactionsProvider = ({children}: IChildren) => {
     const { userLogout } = useContext(UsersContext);
 
     const [transactions, setTransactions] = useState<ITransaction[]>([]);
+    const [allTransactions, setAllTransactions] = useState<ITransaction[]>([]);
     const [filteredTransactions, setFilteredTransactions] = useState<ITransaction[]>([]);
     const [approvedTransactionsSubtotal, setApprovedTransactionsSubtotal] = useState<ISubtotal | null>(null);
     const [openModal, setOpenModal] = useState<boolean>(false);
+
+    const retrieveAllTransactions = async () => {
+        const token = localStorage.getItem("@TransactionsM:Token");
+        try {
+            const { data } = await api.get<ITransaction[]>("/transactions", {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+
+            setAllTransactions(data);
+        } catch (error) {
+            toast.warning("Please, login again :)");
+            console.log(error);
+            userLogout();
+        }
+    };
 
     const retrieveUserTransactions = async () => {
         const token = localStorage.getItem("@TransactionsM:Token");
@@ -127,7 +145,10 @@ export const TransactionsProvider = ({children}: IChildren) => {
         <TransactionsContext.Provider value={{
                 transactions,
                 setTransactions,
+                allTransactions,
+                setAllTransactions,
                 retrieveUserTransactions,
+                retrieveAllTransactions,
                 convertTransactionData,
                 filteredTransactions,
                 filterTransactions,

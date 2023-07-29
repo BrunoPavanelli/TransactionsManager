@@ -1,5 +1,4 @@
 import { useContext, useEffect } from "react";
-import { FaWallet } from "react-icons/fa";
 
 import { OperationBarDivStyled, OperationBarStyled } from "./OperationBarStyled";
 import { SelectStyled } from "./Select/SelectStyled";
@@ -8,12 +7,10 @@ import { AiOutlineSearch } from "react-icons/ai";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { IUserSearchData } from "../../../contexts/TransactionsContext/@transactionsTypes";
 import { TransactionsContext } from "../../../contexts/TransactionsContext/TransactionsContext";
-import { SubtotalModal } from "../../SubtotalModal/SubtotalModal";
 
-
-export const OperationBar = () => {
-    const { retrieveUserData, user } = useContext(UsersContext);
-    const { filterTransactions, openModal, setOpenModal } = useContext(TransactionsContext);
+export const AdminOperationBar = () => {
+    const { retrieveUserData } = useContext(UsersContext);
+    const { filterTransactions} = useContext(TransactionsContext);
 
     const {handleSubmit, register} = useForm<IUserSearchData>();
 
@@ -28,7 +25,7 @@ export const OperationBar = () => {
     return (
         <OperationBarStyled>
             <OperationBarDivStyled className="container__page">
-                <h2 className="black__text0 fw__400 fs__25 letterspace__header desktop">Welcome<span className="blue__white__text"> {user?.username}!</span></h2>
+                <h2 className="black__text0 fw__400 fs__25 letterspace__header desktop"><span className="blue__white__text">Admin</span> Dashboard</h2>
                 <form className="navbar" onSubmit={handleSubmit(submit)}>
                     <SelectStyled {...register("date")}>
                         <option value="Date">Date</option>
@@ -49,10 +46,6 @@ export const OperationBar = () => {
                     <button className="bar__btn">
                         <AiOutlineSearch size={30} />
                     </button>
-                    <button className="bar__btn" onClick={() => setOpenModal(true)}>
-					    <FaWallet size={30} />
-                    </button>
-                    {openModal ? <SubtotalModal/> : null}
 				</form>
             </OperationBarDivStyled>
         </OperationBarStyled>
