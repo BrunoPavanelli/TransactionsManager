@@ -7,7 +7,7 @@ import { Register } from "../pages/Register/Register";
 import { UserDash } from "../pages/UserDash/UserDash";
 import { AdminDash } from "../pages/AdminDash/AdminDash";
 import { AdminRoutes } from "./Outlets/AdminRoutes";
-import { TransactionsProvider } from "../contexts/TransactionsContext/transactionsContext";
+import { TransactionsProvider } from "../contexts/TransactionsContext/TransactionsContext";
 
 export const AppRoutes = () => {
 	return (

@@ -60,8 +60,9 @@ export const UsersProvider = ({children}: IChildren) => {
             setUser(data);
 
         } catch (error) {
-            toast.error("Some Error in User Data req");
+            toast.warning("Please, login again :)");
             console.log(error);
+            userLogout();
         }       
     };
 

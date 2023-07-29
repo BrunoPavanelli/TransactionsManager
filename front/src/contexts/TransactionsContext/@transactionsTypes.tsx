@@ -4,7 +4,9 @@ export interface IUserContext {
     setTransactions: React.Dispatch<React.SetStateAction<ITransaction[]>>
     convertTransactionData: (transaction: ITransaction) => ITransaction,
     filteredTransactions: ITransaction[],
-    filterTransactions: (searchData: IUserSearchData) => Promise<void>
+    filterTransactions: (searchData: IUserSearchData) => Promise<void>,
+    openModal: boolean,
+    setOpenModal: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 export interface ITransaction 	{

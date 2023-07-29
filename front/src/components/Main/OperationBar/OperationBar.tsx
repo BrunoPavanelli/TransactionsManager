@@ -9,11 +9,12 @@ import { AiOutlineSearch } from "react-icons/ai";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { IUserSearchData } from "../../../contexts/TransactionsContext/@transactionsTypes";
 import { TransactionsContext } from "../../../contexts/TransactionsContext/TransactionsContext";
+import { SubtotalModal } from "../../SubtotalModal/SubtotalModal";
 
 
 export const OperationBar = () => {
     const { retrieveUserData, user } = useContext(UsersContext);
-    const { filterTransactions } = useContext(TransactionsContext);
+    const { filterTransactions, openModal, setOpenModal } = useContext(TransactionsContext);
 
     const {handleSubmit, register} = useForm<IUserSearchData>();
 
@@ -49,9 +50,10 @@ export const OperationBar = () => {
                     <button className="bar__btn">
                         <AiOutlineSearch size={30} />
                     </button>
-                    <button className="bar__btn">
+                    <button className="bar__btn" onClick={() => setOpenModal(true)}>
 					    <FaWallet size={30} />
                     </button>
+                    {openModal ? <SubtotalModal/> : null}
 				</form>
             </OperationBarDivStyled>
         </OperationBarStyled>

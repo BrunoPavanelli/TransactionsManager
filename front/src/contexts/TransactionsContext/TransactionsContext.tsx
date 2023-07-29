@@ -10,7 +10,7 @@ export const TransactionsContext = createContext<IUserContext>({} as IUserContex
 export const TransactionsProvider = ({children}: IChildren) => {
     const [transactions, setTransactions] = useState<ITransaction[]>([]);
     const [filteredTransactions, setFilteredTransactions] = useState<ITransaction[]>([]);
-    // const [filteredByDateTransactions, setFilteredByDateTransactions] = useState<ITransaction[]>([]);
+    const [openModal, setOpenModal] = useState<boolean>(false);
 
     const retrieveUserTransactions = async () => {
         const token = localStorage.getItem("@TransactionsM:Token");
@@ -103,7 +103,9 @@ export const TransactionsProvider = ({children}: IChildren) => {
                 retrieveUserTransactions,
                 convertTransactionData,
                 filteredTransactions,
-                filterTransactions
+                filterTransactions,
+                openModal,
+                setOpenModal
             }}>
             {children}
         </TransactionsContext.Provider>
