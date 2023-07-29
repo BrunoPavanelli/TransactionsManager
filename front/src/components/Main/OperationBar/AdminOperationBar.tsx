@@ -6,14 +6,12 @@ import { SelectStyled } from "./Select/SelectStyled";
 import { UsersContext } from "../../../contexts/UsersContext/UsersContext";
 import { AiOutlineSearch } from "react-icons/ai";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { IUserSearchData } from "../../../contexts/TransactionsContext/@transactionsTypes";
-import { TransactionsContext } from "../../../contexts/TransactionsContext/TransactionsContext";
+import { IFilterTransactions } from "../../../contexts/TransactionsContext/@transactionsTypes";
 import { AdminTransactionsContext } from "../../../contexts/TransactionsContext/AdminTransacitionsContext";
 
 export const AdminOperationBar = () => {
     const { retrieveUserData } = useContext(UsersContext);
-    const { filterTransactions } = useContext(TransactionsContext);
-    const { uploadFile } = useContext(AdminTransactionsContext);
+    const { uploadFile, filterTransactions, manipuleFilterData } = useContext(AdminTransactionsContext);
 
     const hiddenFileInput = useRef<HTMLInputElement>(null);
     const handleClick = () => {
@@ -31,10 +29,11 @@ export const AdminOperationBar = () => {
       }
     };
 
-    const {handleSubmit, register} = useForm<IUserSearchData>();
+    const {handleSubmit, register} = useForm<IFilterTransactions>();
 
-    const submit: SubmitHandler<IUserSearchData> = (data) => {
-        filterTransactions(data);
+    const submit: SubmitHandler<IFilterTransactions> = (data) => {
+        const filterData: IFilterTransactions = manipuleFilterData(data);
+        filterTransactions(filterData);
     };
 
     useEffect(() => {
@@ -54,7 +53,7 @@ export const AdminOperationBar = () => {
 
                 </div>
                 <form className="navbar" onSubmit={handleSubmit(submit)}>
-                    <SelectStyled {...register("date")}>
+                    <SelectStyled {...register("dateRange")}>
                         <option value="Date">Date</option>
                         <option value="30 days">1 Month</option>
                         <option value="90 days">3 Months</option>
@@ -70,6 +69,17 @@ export const AdminOperationBar = () => {
                         <option value="Approved">Approved</option>
                         <option value="Reproved">Reproved</option>
                     </SelectStyled>
+
+                    <SelectStyled {...register("valueRange")} >
+                        <option value="Value">Value</option>
+                        <option value="1">0 - $10.000,00</option>
+                        <option value="2">{"> $10.000,00 - $50.000,00"}</option>
+                        <option value="3">{"> $50.000,00 - $250.000,00"}</option>
+                        <option value="4">{"> $250.000,00 - $1.000.000,00"}</option>
+                    </SelectStyled>
+
+                    <input type="text" placeholder="product" {...register("product")}/>
+                    <input type="text" placeholder="cpf" {...register("userCpf")}/>
                     <button className="bar__btn">
                         <AiOutlineSearch size={30} />
                     </button>

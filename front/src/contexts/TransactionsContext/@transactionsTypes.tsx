@@ -15,7 +15,10 @@ export interface IAdminITransactionsContext {
     retrieveAllTransactions: () => Promise<void>,
     allTransactions: ITransaction[],
     setAllTransactions: React.Dispatch<React.SetStateAction<ITransaction[]>>
-    uploadFile: (file: File) => Promise<void>
+    uploadFile: (file: File) => Promise<void>,
+    filteredTransactions: ITransaction[],
+    manipuleFilterData: (filterData: IFilterTransactions) => IFilterTransactions,
+    filterTransactions: (filterData: IFilterTransactions) => Promise<void>
 }
 
 export interface ITransaction 	{
@@ -36,4 +39,15 @@ export interface IUserSearchData {
 
 export interface ISubtotal {
     subtotal: string
+}
+
+export interface IFilterTransactions {
+    userCpf?: string | null, 
+    product?: string | null, 
+    dateRange?: string| null
+    valueRange?: {
+        minValue: number | null;
+        maxValue: number | null;
+    } | string
+    status?: string | null
 }
