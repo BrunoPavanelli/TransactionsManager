@@ -115,12 +115,7 @@ export class TransactionsServices {
 					status: data.status,
 					user_id: userFind.id,
 				};
-
-				// const newDataParsed =
-				//     schemas.transactionsWithOutId.safeParse(newData);
-				// if (!newDataParsed.success)
-				// 	throw new AppError("Invalid File", 400);
-
+				
 				await this.transactionsRepositories.create({
 					...newData,
 				});
