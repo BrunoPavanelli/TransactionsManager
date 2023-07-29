@@ -16,8 +16,8 @@ export async function up(knex: Knex): Promise<void> {
 		table.uuid("id").primary().defaultTo(knex.fn.uuid());
 		table.string("description").notNullable();
 		table.bigInteger("date").notNullable();
-		table.integer("points_value").notNullable();
-		table.integer("value").notNullable();
+		table.bigInteger("points_value").notNullable();
+		table.bigInteger("value").notNullable();
 		table.enu("status", ["Approved", "Reproved", "In Analysis"]);
 		table.string("user_id").nullable();
 		table.foreign("user_id").references("users.id");

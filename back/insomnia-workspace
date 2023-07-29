@@ -1,0 +1,777 @@
+_type: export
+__export_format: 4
+__export_date: 2023-07-29T15:33:09.083Z
+__export_source: insomnia.desktop.app:v2023.4.0
+resources:
+  - _id: req_285d84386ce84fdb852077e8be9fa5d6
+    parentId: fld_60b2be24ddea4be2a239f4332657cc38
+    modified: 1690508259130
+    created: 1690463960967
+    url: "{{ _.baseURL }}/transactions"
+    name: Create
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        	{
+        		"description": "Venda do produto Z",
+        		"date": {% now 'millis', '' %},
+        		"points_value": 10000,
+        		"value": 800,
+        		"status": "In Analysis",
+        		"cpf": "282.279.300-00"
+        	}
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+    authentication:
+      type: bearer
+      token: "{{ _.adminToken }}"
+    metaSortKey: -1690463960967
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_60b2be24ddea4be2a239f4332657cc38
+    parentId: wrk_f46029705d2b474dbefb1283644f02ec
+    modified: 1690463958055
+    created: 1690463958055
+    name: Transactions
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1690463958055
+    _type: request_group
+  - _id: wrk_f46029705d2b474dbefb1283644f02ec
+    parentId: null
+    modified: 1690297760821
+    created: 1690297760821
+    name: Contact Book
+    description: ""
+    scope: design
+    _type: workspace
+  - _id: req_4573e39d8cf647c599f79e9988eb33d6
+    parentId: fld_60b2be24ddea4be2a239f4332657cc38
+    modified: 1690490874071
+    created: 1690464153112
+    url: "{{ _.baseURL }}/transactions"
+    name: Find All
+    description: ""
+    method: GET
+    body:
+      mimeType: application/json
+      text: ""
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+    authentication:
+      type: bearer
+      token: "{{ _.adminToken }}"
+      disabled: false
+    metaSortKey: -1690457987601.375
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_d79ca1a1d9764df5bd2d3c4a3abe6c4b
+    parentId: fld_60b2be24ddea4be2a239f4332657cc38
+    modified: 1690581983622
+    created: 1690490127824
+    url: "{{ _.baseURL }}/transactions/cpf"
+    name: Find By Cpf
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"cpf": "282.279.300-00"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+    authentication:
+      type: bearer
+      token: "{{ _.adminToken }}"
+      disabled: false
+    metaSortKey: -1690455000918.5625
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_99fbf35602da46e79d918f84af3fc420
+    parentId: fld_60b2be24ddea4be2a239f4332657cc38
+    modified: 1690583462392
+    created: 1690498313327
+    url: "{{ _.baseURL }}/transactions/status"
+    name: Find By Status
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"status": "Approved"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+    authentication:
+      type: bearer
+      token: "{{ _.adminToken }}"
+      disabled: false
+    metaSortKey: -1690454254247.8594
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_1462e04cf9754ccd91512527753d5bd2
+    parentId: fld_60b2be24ddea4be2a239f4332657cc38
+    modified: 1690581976304
+    created: 1690498725397
+    url: "{{ _.baseURL }}/transactions/product"
+    name: Find By Product
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"product": "y"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+    authentication:
+      type: bearer
+      token: "{{ _.adminToken }}"
+      disabled: false
+    metaSortKey: -1690453880912.5078
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_92c6189f9653442285b7013c9f55a4ea
+    parentId: fld_60b2be24ddea4be2a239f4332657cc38
+    modified: 1690583672579
+    created: 1690502124761
+    url: "{{ _.baseURL }}/transactions/date_range"
+    name: Find By Date Range
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"dateRange": "30 days"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+    authentication:
+      type: bearer
+      token: "{{ _.adminToken }}"
+      disabled: false
+    metaSortKey: -1690453694244.832
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_4ab988e30dca474b9ddf9de31e4b6c2e
+    parentId: fld_60b2be24ddea4be2a239f4332657cc38
+    modified: 1690583743068
+    created: 1690582993158
+    url: "{{ _.baseURL }}/transactions/token/date_range"
+    name: Find By Token and Date Range
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"dateRange": "5 years"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+    authentication:
+      type: bearer
+      token: "{{ _.commonToken }}"
+      disabled: false
+    metaSortKey: -1690453647577.913
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_d2043621a246488aaa2e369d9ae8bca2
+    parentId: fld_60b2be24ddea4be2a239f4332657cc38
+    modified: 1690582129626
+    created: 1690503924134
+    url: "{{ _.baseURL }}/transactions/value_range"
+    name: Find By Value Range
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"minValue": 10000,
+        	"maxValue": 200000
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+    authentication:
+      type: bearer
+      token: "{{ _.adminToken }}"
+      disabled: false
+    metaSortKey: -1690453600910.9941
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_8503a7afa09f41daaa4c446087971c72
+    parentId: fld_60b2be24ddea4be2a239f4332657cc38
+    modified: 1690638870270
+    created: 1690633577289
+    url: "{{ _.baseURL }}/transactions/filter"
+    name: Find By Filter
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+    authentication:
+      type: bearer
+      token: "{{ _.adminToken }}"
+      disabled: false
+    metaSortKey: -1690453554244.0752
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_a864209a71974de78bd26a7f200114ea
+    parentId: fld_60b2be24ddea4be2a239f4332657cc38
+    modified: 1690505544904
+    created: 1690492671727
+    url: "{{ _.baseURL }}/transactions/token"
+    name: Find By Token
+    description: ""
+    method: GET
+    body:
+      mimeType: application/json
+      text: ""
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+    authentication:
+      type: bearer
+      token: "{{ _.commonToken }}"
+      disabled: false
+    metaSortKey: -1690453507577.1562
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_838cf77ef3f74c20aa849447c6e76240
+    parentId: fld_60b2be24ddea4be2a239f4332657cc38
+    modified: 1690584355073
+    created: 1690584351472
+    url: "{{ _.baseURL }}/transactions/token/subtotal"
+    name: Find By SubTotal By Token
+    description: ""
+    method: GET
+    body:
+      mimeType: application/json
+      text: ""
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+    authentication:
+      type: bearer
+      token: "{{ _.commonToken }}"
+      disabled: false
+    metaSortKey: -1690452760906.4531
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_40eff94a46ad4f158864d837a3c3c414
+    parentId: fld_60b2be24ddea4be2a239f4332657cc38
+    modified: 1690497220875
+    created: 1690464179946
+    url: "{{ _.baseURL }}/transactions/{{ _.transactionId }}"
+    name: Update
+    description: ""
+    method: PATCH
+    body:
+      mimeType: application/json
+      text: |-
+        	{
+        		"status": "Approved"
+        	}
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+    authentication:
+      type: bearer
+      token: "{{ _.adminToken }}"
+    metaSortKey: -1690452014235.75
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_0c9e274dd4414f57a1c0e3ee95cf72c5
+    parentId: fld_60b2be24ddea4be2a239f4332657cc38
+    modified: 1690465547266
+    created: 1690464420889
+    url: "{{ _.baseURL }}/transactions/{{ _.transactionId }}"
+    name: Delete
+    description: ""
+    method: DELETE
+    body:
+      mimeType: application/json
+      text: ""
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+    authentication:
+      type: bearer
+      token: "{{ _.userToken }}"
+    metaSortKey: -1690446040870.125
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_1bba83cb4e6f4e359bd2936979cbda3d
+    parentId: fld_60b2be24ddea4be2a239f4332657cc38
+    modified: 1690600228814
+    created: 1690416174042
+    url: "{{ _.baseURL }}/transactions/upload"
+    name: Upload Csv
+    description: ""
+    method: POST
+    body:
+      mimeType: multipart/form-data
+      params:
+        - name: file
+          value: ""
+          id: pair_f22744f8d1d0402a9546353dfbbf1436
+          type: file
+          fileName: C:\Users\bruno\Downloads\export-collection-all-properties-test-2023-07-27.csv
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: multipart/form-data
+    authentication:
+      type: bearer
+      token: "{{ _.adminToken }}"
+    metaSortKey: -1690440067454.5
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_0e3f5c2b3168446b86b0230ad8df811e
+    parentId: fld_5c114757adbc4f47bdbb14ebba7937bc
+    modified: 1690499514005
+    created: 1690321469116
+    url: "{{ _.baseURL }}/users/login"
+    name: Login Admin
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"email": "admin@mail.com",
+        	"password": "1234"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+    authentication: {}
+    metaSortKey: -1690214783075.5
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_5c114757adbc4f47bdbb14ebba7937bc
+    parentId: wrk_f46029705d2b474dbefb1283644f02ec
+    modified: 1690297766825
+    created: 1690297766825
+    name: Users
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1690297766825
+    _type: request_group
+  - _id: req_f60adc6f589a472194109ab72c950861
+    parentId: fld_5c114757adbc4f47bdbb14ebba7937bc
+    modified: 1690600828909
+    created: 1690490794135
+    url: "{{ _.baseURL }}/users/login"
+    name: Login Common
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"email": "common2@mail.com",
+        	"password": "1234"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+    authentication: {}
+    metaSortKey: -1690194029652.375
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_79158085364c456898f32d2f8d2bfe3a
+    parentId: fld_5c114757adbc4f47bdbb14ebba7937bc
+    modified: 1690499480853
+    created: 1690319855527
+    url: "{{ _.baseURL }}/users"
+    name: Create Admin
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"username": "admin",
+        	"email": "admin@mail.com",
+        	"password": "1234",
+        	"cpf": "282.279.300-01",
+        	"role": "admin"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+    authentication: {}
+    metaSortKey: -1690173276229.25
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_ff040f0c5b03446181bea9e419372993
+    parentId: fld_5c114757adbc4f47bdbb14ebba7937bc
+    modified: 1690600844432
+    created: 1690499492119
+    url: "{{ _.baseURL }}/users"
+    name: Create Common
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"username": "common",
+        	"email": "common2@mail.com",
+        	"password": "1234",
+        	"cpf": "282.279.300-24"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+    authentication: {}
+    metaSortKey: -1690152522806.125
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_816640053dc94acfbd3aef455674e7fd
+    parentId: fld_5c114757adbc4f47bdbb14ebba7937bc
+    modified: 1690505457804
+    created: 1690297938830
+    url: "{{ _.baseURL }}/users/{{ _.userId }}"
+    name: Find One
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication:
+      type: bearer
+      token: "{{ _.adminToken }}"
+      disabled: false
+    metaSortKey: -1690131769383
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_dbd6994e04f34dcdb42b9c6b54f86c36
+    parentId: fld_5c114757adbc4f47bdbb14ebba7937bc
+    modified: 1690582115909
+    created: 1690475125693
+    url: "{{ _.baseURL }}/users/cpf"
+    name: Find By Cpf
+    description: ""
+    method: GET
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"cpf": "282.279.300-00"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+    authentication:
+      type: bearer
+      token: "{{ _.adminToken }}"
+      disabled: false
+    metaSortKey: -1690090262511.75
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_bbf506cda9514acc99651573502ed6ad
+    parentId: fld_5c114757adbc4f47bdbb14ebba7937bc
+    modified: 1690495523859
+    created: 1690297796768
+    url: "{{ _.baseURL }}/users"
+    name: Find All
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication:
+      type: bearer
+      token: "{{ _.adminToken }}"
+    metaSortKey: -1690048755640.5
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_e4ea0c0554694d46abca45d0eb44aa54
+    parentId: fld_5c114757adbc4f47bdbb14ebba7937bc
+    modified: 1690505485237
+    created: 1690492348098
+    url: "{{ _.baseURL }}/users/token"
+    name: Find By Token
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication:
+      type: bearer
+      token: "{{ _.commonToken }}"
+    metaSortKey: -1690048755615.5
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_edf162bd2d44458bb53bb705a1853eb5
+    parentId: fld_5c114757adbc4f47bdbb14ebba7937bc
+    modified: 1690505498071
+    created: 1690377922795
+    url: "{{ _.baseURL }}/users/{{ _.userId }}"
+    name: Update
+    description: ""
+    method: PATCH
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"username": "user2Patched2"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+    authentication:
+      type: bearer
+      token: "{{ _.adminToken }}"
+    metaSortKey: -1690048755590.5
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_42716c6328844e01823ef56c1d498ab6
+    parentId: fld_5c114757adbc4f47bdbb14ebba7937bc
+    modified: 1690425343478
+    created: 1690425340135
+    url: "{{ _.baseURL }}/users/{{ _.userId }}"
+    name: Delete
+    description: ""
+    method: DELETE
+    body:
+      mimeType: application/json
+      text: ""
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+    authentication: {}
+    metaSortKey: -1690007248794.25
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: env_72539f50370ccc71eec55b5391c45c1a3a25c81c
+    parentId: wrk_f46029705d2b474dbefb1283644f02ec
+    modified: 1690554114856
+    created: 1690297760824
+    name: Base Environment
+    data:
+      baseURL: http://localhost:3000
+      userId: "{% response 'body', 'req_79158085364c456898f32d2f8d2bfe3a',
+        'b64::JC5pZA==::46b', 'never', 60 %}"
+      adminToken: "{% response 'body', 'req_0e3f5c2b3168446b86b0230ad8df811e',
+        'b64::JC50b2tlbg==::46b', 'never', 60 %}"
+      commonToken: "{% response 'body', 'req_f60adc6f589a472194109ab72c950861',
+        'b64::JC50b2tlbg==::46b', 'never', 60 %}"
+      transactionId: "{% response 'body', 'req_285d84386ce84fdb852077e8be9fa5d6',
+        'b64::JC5pZA==::46b', 'never', 60 %}"
+    dataPropertyOrder:
+      "&":
+        - baseURL
+        - userId
+        - adminToken
+        - commonToken
+        - transactionId
+    color: null
+    isPrivate: false
+    metaSortKey: 1690297760824
+    _type: environment
+  - _id: jar_72539f50370ccc71eec55b5391c45c1a3a25c81c
+    parentId: wrk_f46029705d2b474dbefb1283644f02ec
+    modified: 1690297760826
+    created: 1690297760826
+    name: Default Jar
+    cookies: []
+    _type: cookie_jar
+  - _id: spc_13bee87c278745e68d8bcd37194fca97
+    parentId: wrk_f46029705d2b474dbefb1283644f02ec
+    modified: 1690377062958
+    created: 1690297760823
+    fileName: Contact Book
+    contents: ""
+    contentType: yaml
+    _type: api_spec
