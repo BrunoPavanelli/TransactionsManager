@@ -1,7 +1,7 @@
 import { createContext, useState } from "react";
 import { toast } from "react-toastify";
 
-import { ITransaction, IUserContext, IUserSearchData } from "./@transactionsTypes";
+import { ISubtotal, ITransaction, IUserContext, IUserSearchData } from "./@transactionsTypes";
 import { IChildren } from "../../@types/@globalTypes";
 import { api } from "../../service/api";
 
@@ -10,6 +10,7 @@ export const TransactionsContext = createContext<IUserContext>({} as IUserContex
 export const TransactionsProvider = ({children}: IChildren) => {
     const [transactions, setTransactions] = useState<ITransaction[]>([]);
     const [filteredTransactions, setFilteredTransactions] = useState<ITransaction[]>([]);
+    const [approvedTransactionsSubtotal, setApprovedTransactionsSubtotal] = useState<ISubtotal | null>(null);
     const [openModal, setOpenModal] = useState<boolean>(false);
 
     const retrieveUserTransactions = async () => {
@@ -19,13 +20,35 @@ export const TransactionsProvider = ({children}: IChildren) => {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
-            }); 
-            setTransactions(data);
+            });
 
+            setTransactions(data);
         } catch (error) {
             toast.error("Some Error in Transactions req");
             console.log(error);
         }
+    };
+
+    const retrieveSubtotalUserApprovedTransactions = async () => {
+        const token = localStorage.getItem("@TransactionsM:Token");
+        try {
+            let { data } = await api.get<ISubtotal>("transactions/token/subtotal", {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+
+            const value: string = `$ ${Number(data.subtotal).toLocaleString()},00`; 
+            data = {
+                subtotal: value
+            };
+            
+            setApprovedTransactionsSubtotal(data);
+
+        } catch (error) {
+            toast.error("Some Error in Transactions req");
+            console.log(error);
+        }        
     };
 
     const convertTransactionData = (transaction: ITransaction) => {
@@ -105,7 +128,9 @@ export const TransactionsProvider = ({children}: IChildren) => {
                 filteredTransactions,
                 filterTransactions,
                 openModal,
-                setOpenModal
+                setOpenModal,
+                approvedTransactionsSubtotal,
+                retrieveSubtotalUserApprovedTransactions
             }}>
             {children}
         </TransactionsContext.Provider>

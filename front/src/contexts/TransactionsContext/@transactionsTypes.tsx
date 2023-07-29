@@ -6,7 +6,9 @@ export interface IUserContext {
     filteredTransactions: ITransaction[],
     filterTransactions: (searchData: IUserSearchData) => Promise<void>,
     openModal: boolean,
-    setOpenModal: React.Dispatch<React.SetStateAction<boolean>>
+    setOpenModal: React.Dispatch<React.SetStateAction<boolean>>,
+    approvedTransactionsSubtotal: ISubtotal | null,
+    retrieveSubtotalUserApprovedTransactions: () => Promise<void>
 }
 
 export interface ITransaction 	{
@@ -22,4 +24,8 @@ export interface ITransaction 	{
 export interface IUserSearchData {
     date: string,
     status: string
+}
+
+export interface ISubtotal {
+    subtotal: string
 }

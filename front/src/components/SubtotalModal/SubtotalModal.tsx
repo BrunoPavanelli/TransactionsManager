@@ -4,14 +4,14 @@ import { useContext } from "react";
 import { TransactionsContext } from "../../contexts/TransactionsContext/TransactionsContext";
 
 export const SubtotalModal = () => {
-    const { setOpenModal } = useContext(TransactionsContext);
+    const { setOpenModal, approvedTransactionsSubtotal } = useContext(TransactionsContext);
     return (
         <SubtotalModalStyled role="dialog">
             <div>
                 <div>         
                     <AiOutlineCloseCircle size={25} className="close" onClick={() => setOpenModal(false)} />
                     <p className="fw__600 fs__19">For Approved Transactions:</p>
-                    <p>Subtotal: $10.000.000,00</p>
+                    <p>Subtotal: {approvedTransactionsSubtotal?.subtotal}</p>
                 </div>
             </div>
         </SubtotalModalStyled>

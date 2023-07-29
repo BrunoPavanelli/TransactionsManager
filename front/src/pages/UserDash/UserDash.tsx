@@ -10,11 +10,12 @@ import { TransactionsContext } from "../../contexts/TransactionsContext/Transact
 
 export const UserDash = () => {
     const { userLogout, retrieveUserData } = useContext(UsersContext);
-    const { retrieveUserTransactions } = useContext(TransactionsContext);
+    const { retrieveUserTransactions, retrieveSubtotalUserApprovedTransactions } = useContext(TransactionsContext);
 
     useEffect(() => {
         retrieveUserData();
         retrieveUserTransactions();
+        retrieveSubtotalUserApprovedTransactions();
     }, []);
 
     return (
