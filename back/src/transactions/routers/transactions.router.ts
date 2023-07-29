@@ -33,7 +33,7 @@ transactions.use((req, res, next) =>
 	usersMiddlewares.verifyAdminRole(req, res, next)
 );
 
-transactions.post("/filter", upload.single("file"), (req, res) =>
+transactions.post("/filter", (req, res) =>
 	transactionsController.filterTransactions(req, res)
 );
 
