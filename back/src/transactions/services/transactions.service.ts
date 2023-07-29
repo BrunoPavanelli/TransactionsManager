@@ -17,7 +17,8 @@ import {
 	TTransactionResponse,
 	TTrasactionUpdate,
 	TValueRange,
-	TTransactions
+	TTransactions,
+	TFilterTransactions
 } from "../interfaces/transactions.interfaces";
 
 export class TransactionsServices {
@@ -260,6 +261,22 @@ export class TransactionsServices {
 		return {
 			subtotal: subTotal
 		};
+	}
+
+	async filterTransactions(filterData: TFilterTransactions): Promise<TTransactions[]> {
+		let transactions: TTransactions[] = await this.transactionsRepositories.findAll();
+
+		if (filterData.userCpf)	transactions = transactions.filter(transaction => transaction.cpf === filterData.userCpf);
+		if (filterData.product) transactions = transactions.filter(transaction => transaction.description.toLowerCase().includes(filterData.product!.toLowerCase()));
+		if (filterData.status) transactions = transactions.filter(transaction => transaction.status === filterData.status);
+		if (filterData.dateRange) {
+			const dateRangeInTime = this.createMinAndMaxDate(filterData.dateRange);
+
+			transactions = transactions.filter(transaction => transaction.date >= dateRangeInTime.minDate && transaction.date <= dateRangeInTime.maxDate);
+		}
+		if (filterData.valueRange.minValue && filterData.valueRange.maxValue) 
+			transactions = transactions.filter(transaction => transaction.value >= filterData.valueRange.minValue! && transaction.value <= filterData.valueRange.maxValue!);
+		return transactions;
 	}
 
 	async updateById(
