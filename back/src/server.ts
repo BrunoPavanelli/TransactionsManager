@@ -1,6 +1,6 @@
 import app from "./app";
 
-const appPort = 3000 || process.env.APP_PORT;
+const appPort = 3000;
 
 const server = (port: number) =>
 	app.listen(port, () => {
