@@ -1,17 +1,17 @@
 CPF,Descrição da transação,Data da transação,Valor em pontos,Valor,Status
-123.423.974-01,Venda do produto Z,10-10-2022,""12,460"",""12.460,00"",Em avaliação
-123.423.974-01,Venda do produto Y,10-10-2022,""1,021"",""1.021,00"",Reprovado
-123.423.974-01,Venda do produto W,10-10-2022,""5,101"",""5.101,00"",Aprovado
-123.423.974-01,Venda do produto X,10-10-2022,""230,400"",""30.400,00"",Aprovado
-223.423.974-01,Venda do produto Y,10-10-2022,""112,460"",""12.460,00"",Aprovado
-223.423.974-01,Venda do produto Y,10-10-2022,""51,021"",""51.021,00"",Reprovado
-223.423.974-01,Venda do produto U,10-10-2022,""3,510"",""3.510,00"",Reprovado
-223.423.974-01,Venda do produto X,10-10-2022,""230,400"",""30.400,00"",Em avaliação
-323.423.974-01,Venda do produto Y,10-10-2022,""442,670"",""42.670,00"",Aprovado
-323.423.974-01,Venda do produto Y,10-10-2022,""32,032"",""32.032,00"",Reprovado
-323.423.974-01,Venda do produto U,10-10-2022,""13,510"",""13.510,00"",Em avaliação
-323.423.974-01,Venda do produto X,10-10-2022,""230,400"",""230.400,00"",Em avaliação
-423.423.974-01,Venda do produto Y,10-10-2022,""12,460"",""12.460,00"",Aprovado
-423.423.974-01,Venda do produto Y,10-10-2022,""1,000,000"",""1.000.000,00"",Reprovado
-423.423.974-01,Venda do produto U,10-10-2022,""230,400"",""230.400,00"",Em avaliação
-423.423.974-01,Venda do produto X,10-10-2022,""230,400"",""1.230.400,00"",Em avaliação
+123.423.974-01,Venda do produto Z,10-10-2022,"12,460","12.460,00",Em avaliação
+123.423.974-01,Venda do produto Y,10-10-2022,"1,021","1.021,00",Reprovado
+123.423.974-01,Venda do produto W,10-10-2022,"5,101","5.101,00",Aprovado
+123.423.974-01,Venda do produto X,10-10-2022,"230,400","30.400,00",Aprovado
+223.423.974-01,Venda do produto Y,10-10-2022,"112,460","12.460,00",Aprovado
+223.423.974-01,Venda do produto Y,10-10-2022,"51,021","51.021,00",Reprovado
+223.423.974-01,Venda do produto U,10-10-2022,"3,510","3.510,00",Reprovado
+223.423.974-01,Venda do produto X,10-10-2022,"230,400","30.400,00",Em avaliação
+323.423.974-01,Venda do produto Y,10-10-2022,"442,670","42.670,00",Aprovado
+323.423.974-01,Venda do produto Y,10-10-2022,"32,032","32.032,00",Reprovado
+323.423.974-01,Venda do produto U,10-10-2022,"13,510","13.510,00",Em avaliação
+323.423.974-01,Venda do produto X,10-10-2022,"230,400","230.400,00",Em avaliação
+423.423.974-01,Venda do produto Y,10-10-2022,"12,460","12.460,00",Aprovado
+423.423.974-01,Venda do produto Y,10-10-2022,"1,000,000","1.000.000,00",Reprovado
+423.423.974-01,Venda do produto U,10-10-2022,"230,400","230.400,00",Em avaliação
+423.423.974-01,Venda do produto X,10-10-2022,"230,400","1.230.400,00",Em avaliação
