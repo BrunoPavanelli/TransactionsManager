@@ -22,7 +22,7 @@ export const AdminOperationBar = () => {
     const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
       if (e.target.files) {
         const file: File = (e.target.files[0]);
-        console.log(file);
+
         const formData = new FormData();
         formData.append("file", file);
         uploadFile(file);
