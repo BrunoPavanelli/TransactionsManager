@@ -4,13 +4,14 @@ import {
 	TTransactionResponse,
 	TTrasactionUpdate,
 	TValueRange,
+	TTransactions
 } from "../interfaces/transactions.interfaces";
 
 export abstract class TransactionsRepositories {
     abstract create(
         transactionData: TTransactionCreateInDb
     ): Promise<TTransactionResponse>;
-    abstract findAll(): Promise<TTransactionResponse[]>;
+    abstract findAll(): Promise<TTransactions[]>;
     abstract findByCpfUser(userId: string): Promise<TTransactionResponse[]>;
     abstract findByStatus(status: string): Promise<TTransactionResponse[]>;
     abstract findByProduct(product: string): Promise<TTransactionResponse[]>;

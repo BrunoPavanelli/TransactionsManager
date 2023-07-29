@@ -5,6 +5,7 @@ import {
 	TTransactionResponse,
 	TTrasactionUpdate,
 	TValueRange,
+	TTransactions
 } from "../../interfaces/transactions.interfaces";
 import { TransactionsRepositories } from "../transactions.repositories";
 
@@ -29,10 +30,21 @@ export class KnexTransactionRepositories implements TransactionsRepositories {
 		return transactionResponse;
 	}
 
-	async findAll(): Promise<TTransactionResponse[]> {
-		const transactions: TTransactionResponse[] = await database
-			.select("*")
-			.from("transactions");
+	async findAll(): Promise<TTransactions[]> {
+		const transactions: TTransactions[] = await database
+			.select(
+				"transactions.id",
+				"transactions.description",
+				"transactions.date",
+				"transactions.points_value",
+				"transactions.value",
+				"transactions.status",
+				"transactions.user_id",
+				"users.cpf"
+			)
+			.from("transactions")
+			.join("users", "users.id", "transactions.user_id");
+
 
 		return transactions;
 	}

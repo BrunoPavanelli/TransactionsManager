@@ -2,6 +2,8 @@ import { z } from "zod";
 
 import schemas from "../schemas/transactions.schemas";
 
+type TTransactions = z.infer<typeof schemas.transactions>
+
 type TTransactionResponse = z.infer<typeof schemas.response>;
 
 type TTransactionRequest = z.infer<typeof schemas.request>;
@@ -43,5 +45,6 @@ export {
 	TNoProducts,
 	TDateRange,
 	TValueRange,
-	TSubtotal
+	TSubtotal,
+	TTransactions
 };
