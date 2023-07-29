@@ -1,13 +1,16 @@
-import { createContext, useState } from "react";
+import { createContext, useContext, useState } from "react";
 import { toast } from "react-toastify";
 
 import { ISubtotal, ITransaction, IUserContext, IUserSearchData } from "./@transactionsTypes";
 import { IChildren } from "../../@types/@globalTypes";
 import { api } from "../../service/api";
+import { UsersContext } from "../UsersContext/UsersContext";
 
 export const TransactionsContext = createContext<IUserContext>({} as IUserContext);
 
 export const TransactionsProvider = ({children}: IChildren) => {
+    const { userLogout } = useContext(UsersContext);
+
     const [transactions, setTransactions] = useState<ITransaction[]>([]);
     const [filteredTransactions, setFilteredTransactions] = useState<ITransaction[]>([]);
     const [approvedTransactionsSubtotal, setApprovedTransactionsSubtotal] = useState<ISubtotal | null>(null);
@@ -24,8 +27,9 @@ export const TransactionsProvider = ({children}: IChildren) => {
 
             setTransactions(data);
         } catch (error) {
-            toast.error("Some Error in Transactions req");
+            toast.warning("Please, login again :)");
             console.log(error);
+            userLogout();
         }
     };
 
@@ -42,12 +46,13 @@ export const TransactionsProvider = ({children}: IChildren) => {
             data = {
                 subtotal: value
             };
-            
+
             setApprovedTransactionsSubtotal(data);
 
         } catch (error) {
-            toast.error("Some Error in Transactions req");
+            toast.warning("Please, login again :)");
             console.log(error);
+            userLogout();
         }        
     };
 
@@ -87,7 +92,6 @@ export const TransactionsProvider = ({children}: IChildren) => {
 
             return data;
         } catch (error) {
-            toast.error("Some Error in Transactions Filter By Date req");
             console.log(error);
         }        
     };
