@@ -9,6 +9,7 @@ import {
 	TTransactionCreateInDb,
 	TTransactionRequest,
 	TTransactionResponse,
+	TTransactions,
 	TTrasactionUpdate,
 } from "../interfaces/transactions.interfaces";
 
@@ -95,6 +96,13 @@ class TransactionsController {
 
 		const transactions: TTransactionResponse[] = 
 			await this.transactionsServices.findByTokenAndDateRange(dateRange, cpf);
+		return res.json(transactions);
+	}
+
+	async filterTransactions(req: Request, res: Response): Promise<Response> {
+		const filterData = req.body;
+		const transactions: TTransactions[] = await this.transactionsServices.filterTransactions(filterData);
+
 		return res.json(transactions);
 	}
 

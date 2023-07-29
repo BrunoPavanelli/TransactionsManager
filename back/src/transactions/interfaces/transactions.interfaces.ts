@@ -36,6 +36,17 @@ type TSubtotal = {
 
 type TValueRange = z.infer<typeof schemas.valueRange>
 
+type TFilterTransactions = {
+    userCpf: string | null, 
+    product: string | null, 
+    dateRange: string| null
+    valueRange: {
+        minValue: number | null;
+        maxValue: number | null;
+    } 
+    status: string | null
+}
+
 export {
 	TTransactionResponse,
 	TTransactionRequest,
@@ -46,5 +57,6 @@ export {
 	TDateRange,
 	TValueRange,
 	TSubtotal,
-	TTransactions
+	TTransactions,
+	TFilterTransactions
 };
