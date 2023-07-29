@@ -1,8 +1,8 @@
-<h1 align="center">
+<h1>
   TransactionsManager
 </h1>
 
-<p align = "center">
+<p>
    TransactionsManager is an Full Stack application, made for management for clients transactions. </br> 
    Admins can create reports about transactions according to users CPF's, products names, status, and ranges of dates and values. </br>
    Users can search owns transactions by stauts and date range to.
@@ -10,15 +10,11 @@
 
 ## **Tecnologies**
 
-<p align = "center">
+<p>
 	Coded with Typescript </br> 
 	Database used: MYSQL </br> 
 	The Back-End API was build with: Node.js with Express.js and Knex.js </br> 
 	The Front-End application was made with React.js </br> 
-</p>
-
-<p align="center">
-  <a href="#endpoints">Endpoints</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </p>
 
 ## Running Localy
