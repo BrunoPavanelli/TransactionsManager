@@ -11,7 +11,8 @@ export interface IUserContext {
     openModal: boolean,
     setOpenModal: React.Dispatch<React.SetStateAction<boolean>>,
     approvedTransactionsSubtotal: ISubtotal | null,
-    retrieveSubtotalUserApprovedTransactions: () => Promise<void>
+    retrieveSubtotalUserApprovedTransactions: () => Promise<void>,
+    uploadFile: (file: File) => Promise<void>
 }
 
 export interface ITransaction 	{
@@ -22,6 +23,7 @@ export interface ITransaction 	{
     value: number | string,
     status: "In Analisys" | "Approved" | "Reproved",
     user_id: string
+    cpf?: string
 }
 
 export interface IUserSearchData {

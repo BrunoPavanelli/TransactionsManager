@@ -13,6 +13,48 @@ export const OperationBarStyled = styled.div`
     justify-content: center;
     align-items: center;
 
+    .admin {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+
+        .file__upload {
+            height: 100%;
+            text-align: center;
+
+            padding: 1.5rem;
+
+            cursor: pointer;
+
+            p {
+                margin-top: 10px;
+                color: #bbcada;
+
+                transition: 0.25s;
+            }
+
+            input {
+                display: none;
+            }
+
+            .upload {
+                color: aliceblue;
+
+                transition: 0.25s;
+            }
+
+            &:hover p{
+                color: var(--black-0);
+            }
+
+            &:hover .upload{
+                color: var(--black-0);
+            }
+        }
+
+ 
+    }
+
     .navbar {
         width: max-content;
 
@@ -26,6 +68,12 @@ export const OperationBarStyled = styled.div`
         .bar__btn {
             cursor: pointer;
             background-color: transparent;
+
+            transition: ease-in-out 0.25s;
+            
+            &:hover {
+                color: aliceblue;
+            }
         }
     }
 `;
@@ -36,4 +84,8 @@ export const OperationBarDivStyled = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
+`;
+
+export const InputFileStyled = styled.input`
+
 `;

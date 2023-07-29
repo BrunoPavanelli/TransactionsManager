@@ -5,11 +5,14 @@ import { ISubtotal, ITransaction, IUserContext, IUserSearchData } from "./@trans
 import { IChildren } from "../../@types/@globalTypes";
 import { api } from "../../service/api";
 import { UsersContext } from "../UsersContext/UsersContext";
+import { useNavigate } from "react-router-dom";
 
 export const TransactionsContext = createContext<IUserContext>({} as IUserContext);
 
 export const TransactionsProvider = ({children}: IChildren) => {
     const { userLogout } = useContext(UsersContext);
+
+    const navigate = useNavigate();
 
     const [transactions, setTransactions] = useState<ITransaction[]>([]);
     const [allTransactions, setAllTransactions] = useState<ITransaction[]>([]);
@@ -141,6 +144,28 @@ export const TransactionsProvider = ({children}: IChildren) => {
         setFilteredTransactions(filteredTransactions);
     };
 
+    const uploadFile = async (file: any) => {
+        const token = localStorage.getItem("@TransactionsM:Token");
+        const formData = new FormData();
+        formData.append("file", file);
+        try {
+            const response = await api.post("/transactions/upload", formData, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    "Content-Type": "multipart/form-data",
+                    "Content-Length": `${file.size}`
+                }
+            }); 
+            toast.success("Succes! File Uploaded.");
+
+            setTimeout(() => {
+                window.location.reload();
+            }, 2500);
+        } catch (error) {
+            console.log(error);
+        }        
+    };
+
     return (
         <TransactionsContext.Provider value={{
                 transactions,
@@ -155,7 +180,8 @@ export const TransactionsProvider = ({children}: IChildren) => {
                 openModal,
                 setOpenModal,
                 approvedTransactionsSubtotal,
-                retrieveSubtotalUserApprovedTransactions
+                retrieveSubtotalUserApprovedTransactions,
+                uploadFile
             }}>
             {children}
         </TransactionsContext.Provider>

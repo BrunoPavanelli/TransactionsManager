@@ -8,6 +8,7 @@ interface ITransactionsCardProps {
 export const TransactionsCard = ({ transaction }: ITransactionsCardProps) => {
 	return (
 		<TransactionsCardStyled>
+			{transaction.cpf ? <p>{transaction.cpf}</p> : null }
 			<p>{transaction.description}</p>
 			<p>{transaction.date}</p>
 			<p>{transaction.points_value}</p>
