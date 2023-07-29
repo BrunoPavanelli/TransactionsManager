@@ -266,7 +266,7 @@ export class TransactionsServices {
 	async filterTransactions(filterData: TFilterTransactions): Promise<TTransactions[]> {
 		let transactions: TTransactions[] = await this.transactionsRepositories.findAll();
 
-		if (filterData.userCpf)	transactions = transactions.filter(transaction => transaction.cpf === filterData.userCpf);
+		if (filterData.userCpf)	transactions = transactions.filter(transaction => transaction.cpf.includes(filterData.userCpf!));
 		if (filterData.product) transactions = transactions.filter(transaction => transaction.description.toLowerCase().includes(filterData.product!.toLowerCase()));
 		if (filterData.status) transactions = transactions.filter(transaction => transaction.status === filterData.status);
 		if (filterData.dateRange) {
@@ -274,7 +274,7 @@ export class TransactionsServices {
 
 			transactions = transactions.filter(transaction => transaction.date >= dateRangeInTime.minDate && transaction.date <= dateRangeInTime.maxDate);
 		}
-		if (filterData.valueRange.minValue && filterData.valueRange.maxValue) 
+		if (filterData.valueRange?.minValue && filterData.valueRange?.maxValue)
 			transactions = transactions.filter(transaction => transaction.value >= filterData.valueRange.minValue! && transaction.value <= filterData.valueRange.maxValue!);
 		return transactions;
 	}
