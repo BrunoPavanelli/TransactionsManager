@@ -10,4 +10,4 @@ export const SelectStyled = styled.select`
     color: var(--secondary-white-blue);
 
     cursor: pointer;
- `;
+`;

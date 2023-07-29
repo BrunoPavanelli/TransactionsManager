@@ -2,12 +2,13 @@ import { ChangeEvent, useContext, useEffect, useRef } from "react";
 import { FiUpload } from "react-icons/fi";
 
 import { OperationBarDivStyled, OperationBarStyled } from "./OperationBarStyled";
-import { SelectStyled } from "./Select/SelectStyled";
+import { SelectStyled } from "./Filters/SelectStyled";
 import { UsersContext } from "../../../contexts/UsersContext/UsersContext";
 import { AiOutlineSearch } from "react-icons/ai";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { IFilterTransactions } from "../../../contexts/TransactionsContext/@transactionsTypes";
 import { AdminTransactionsContext } from "../../../contexts/TransactionsContext/AdminTransacitionsContext";
+import { InputStyled } from "./Filters/InputAdminStyled";
 
 export const AdminOperationBar = () => {
     const { retrieveUserData } = useContext(UsersContext);
@@ -29,11 +30,12 @@ export const AdminOperationBar = () => {
       }
     };
 
-    const {handleSubmit, register} = useForm<IFilterTransactions>();
+    const {handleSubmit, register, reset} = useForm<IFilterTransactions>();
 
     const submit: SubmitHandler<IFilterTransactions> = (data) => {
         const filterData: IFilterTransactions = manipuleFilterData(data);
         filterTransactions(filterData);
+        reset();
     };
 
     useEffect(() => {
@@ -78,8 +80,8 @@ export const AdminOperationBar = () => {
                         <option value="4">{"> $250.000,00 - $1.000.000,00"}</option>
                     </SelectStyled>
 
-                    <input type="text" placeholder="product" {...register("product")}/>
-                    <input type="text" placeholder="cpf" {...register("userCpf")}/>
+                    <InputStyled type="text" placeholder="product" {...register("product")}/>
+                    <InputStyled type="text" placeholder="cpf" {...register("userCpf")}/>
                     <button className="bar__btn">
                         <AiOutlineSearch size={30} />
                     </button>
