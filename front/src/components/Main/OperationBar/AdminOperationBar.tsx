@@ -44,7 +44,7 @@ export const AdminOperationBar = () => {
             <OperationBarDivStyled className="container__page">
                 <div className="admin">
                     <h2 className="black__text0 fw__400 fs__25 letterspace__header desktop"><span className="blue__white__text">Admin</span> Dashboard</h2>
-                    <div className="file__upload" onClick={(e) => handleClick()}>
+                    <div className="file__upload" onClick={() => handleClick()}>
                         <input type="file" ref={hiddenFileInput} onChange={(e) => handleFileChange(e)}/>
                         <FiUpload size={30} className="upload" />
                         <p className="fs__10">Click box to upload</p>

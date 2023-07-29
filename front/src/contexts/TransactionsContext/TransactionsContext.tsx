@@ -5,14 +5,11 @@ import { ISubtotal, ITransaction, IUserContext, IUserSearchData } from "./@trans
 import { IChildren } from "../../@types/@globalTypes";
 import { api } from "../../service/api";
 import { UsersContext } from "../UsersContext/UsersContext";
-import { useNavigate } from "react-router-dom";
 
 export const TransactionsContext = createContext<IUserContext>({} as IUserContext);
 
 export const TransactionsProvider = ({children}: IChildren) => {
     const { userLogout } = useContext(UsersContext);
-
-    const navigate = useNavigate();
 
     const [transactions, setTransactions] = useState<ITransaction[]>([]);
     const [allTransactions, setAllTransactions] = useState<ITransaction[]>([]);
@@ -149,7 +146,7 @@ export const TransactionsProvider = ({children}: IChildren) => {
         const formData = new FormData();
         formData.append("file", file);
         try {
-            const response = await api.post("/transactions/upload", formData, {
+            await api.post("/transactions/upload", formData, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                     "Content-Type": "multipart/form-data",
