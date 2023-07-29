@@ -85,7 +85,6 @@ export const AdminTransactionsProvider = ({children}: IChildren) => {
         if (filterData.userCpf === "") delete filterData.userCpf;
 
         if (filterData.valueRange) {
-            console.log(filterData.valueRange);
             const newValueRange = rangeArray.map(item => {
                 if (String(item.range) === filterData.valueRange) {
                     const newValueRange = {
