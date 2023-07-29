@@ -23,7 +23,7 @@ export const UserDash = () => {
         <UserDashStyled>
             <Header children={<CiLogout className="logout" size={32} onClick={userLogout}/>}/>
             <OperationBar/>
-            <TransactionsSection children={<TransactionsDiv />} role="common"/>
+            <TransactionsSection children={<TransactionsDiv />} />
         </UserDashStyled>
     );
 };

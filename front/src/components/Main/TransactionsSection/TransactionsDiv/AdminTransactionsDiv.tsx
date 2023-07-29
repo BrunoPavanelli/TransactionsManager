@@ -11,14 +11,24 @@ export const AdminTransactionsDiv = () => {
 	
 	return (
 		<TransactionsDivStyled className="container__page">
-			{
-				allTransactions.map(transaction => {
-					transaction = convertTransactionData(transaction);
+			<div className="header">
+				<p>User</p>
+				<p>Description</p>
+				<p>Date</p>
+				<p>Value in Points</p>
+				<p>Value</p>
+				<p>Status</p>
+			</div>
+			<ul>
+				{
+					allTransactions.map(transaction => {
+						transaction = convertTransactionData(transaction);
+					
+						return <TransactionsCard transaction={transaction} key={transaction.id}/>;
+					})
 				
-					return <TransactionsCard transaction={transaction} key={transaction.id}/>;
-				})
-			
-			}
+				}
+			</ul>
 		</TransactionsDivStyled>
 	);
 };

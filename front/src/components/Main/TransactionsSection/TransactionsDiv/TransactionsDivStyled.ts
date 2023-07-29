@@ -1,19 +1,38 @@
 import { styled } from "styled-components";
 
-export const TransactionsDivStyled = styled.ul`
+export const TransactionsDivStyled = styled.div`
     min-height: 50%;
-    height: 75%;
+    height: 100%;
 
     margin-inline: auto;
 
-    overflow-y: auto;
+    .header {
+        background-color: red;
+        width: 100%;
+        min-height: 75px;  
 
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
+        margin-inline: auto;
 
-    &:first-child {
-        border-radius: 0 50px 0 50px;
+        background: rgb(2,14,19);
+        background: linear-gradient(95deg, rgba(2,14,19,0.71) 0%, rgba(116,229,218,0.5) 10%, rgba(116,229,218,0.5) 91%, rgba(2,14,19,0.7133228291316527) 100%);
+
+        padding-left: 2rem;
+        padding-right: 3rem;
+        
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    ul {
+        height: calc(100% - 75px);
+        width: 100%;
+
+        overflow-y: auto;
+
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
     }
 
     .notransactions {
