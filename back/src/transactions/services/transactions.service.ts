@@ -17,6 +17,7 @@ import {
 	TTransactionResponse,
 	TTrasactionUpdate,
 	TValueRange,
+	TTransactions
 } from "../interfaces/transactions.interfaces";
 
 export class TransactionsServices {
@@ -172,7 +173,7 @@ export class TransactionsServices {
 		return await this.transactionsRepositories.create(transactionCreateInDb);
 	}
 
-	async findAll(): Promise<TTransactionResponse[]> {
+	async findAll(): Promise<TTransactions[]> {
 		return await this.transactionsRepositories.findAll();
 	}
 
