@@ -1,10 +1,7 @@
-export interface IUserContext {
+export interface ITransactionsContext {
     retrieveUserTransactions: () => Promise<void>,
-    retrieveAllTransactions: () => Promise<void>,
     transactions: ITransaction[],
     setTransactions: React.Dispatch<React.SetStateAction<ITransaction[]>>
-    allTransactions: ITransaction[],
-    setAllTransactions: React.Dispatch<React.SetStateAction<ITransaction[]>>
     convertTransactionData: (transaction: ITransaction) => ITransaction,
     filteredTransactions: ITransaction[],
     filterTransactions: (searchData: IUserSearchData) => Promise<void>,
@@ -12,6 +9,12 @@ export interface IUserContext {
     setOpenModal: React.Dispatch<React.SetStateAction<boolean>>,
     approvedTransactionsSubtotal: ISubtotal | null,
     retrieveSubtotalUserApprovedTransactions: () => Promise<void>,
+}
+
+export interface IAdminITransactionsContext {
+    retrieveAllTransactions: () => Promise<void>,
+    allTransactions: ITransaction[],
+    setAllTransactions: React.Dispatch<React.SetStateAction<ITransaction[]>>
     uploadFile: (file: File) => Promise<void>
 }
 

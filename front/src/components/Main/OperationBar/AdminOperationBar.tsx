@@ -8,10 +8,12 @@ import { AiOutlineSearch } from "react-icons/ai";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { IUserSearchData } from "../../../contexts/TransactionsContext/@transactionsTypes";
 import { TransactionsContext } from "../../../contexts/TransactionsContext/TransactionsContext";
+import { AdminTransactionsContext } from "../../../contexts/TransactionsContext/AdminTransacitionsContext";
 
 export const AdminOperationBar = () => {
     const { retrieveUserData } = useContext(UsersContext);
-    const { filterTransactions, uploadFile } = useContext(TransactionsContext);
+    const { filterTransactions } = useContext(TransactionsContext);
+    const { uploadFile } = useContext(AdminTransactionsContext);
 
     const hiddenFileInput = useRef<HTMLInputElement>(null);
     const handleClick = () => {

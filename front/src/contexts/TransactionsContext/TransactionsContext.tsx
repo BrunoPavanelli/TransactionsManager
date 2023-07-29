@@ -1,38 +1,20 @@
 import { createContext, useContext, useState } from "react";
 import { toast } from "react-toastify";
 
-import { ISubtotal, ITransaction, IUserContext, IUserSearchData } from "./@transactionsTypes";
+import { ISubtotal, ITransaction, ITransactionsContext, IUserSearchData } from "./@transactionsTypes";
 import { IChildren } from "../../@types/@globalTypes";
 import { api } from "../../service/api";
 import { UsersContext } from "../UsersContext/UsersContext";
 
-export const TransactionsContext = createContext<IUserContext>({} as IUserContext);
+export const TransactionsContext = createContext<ITransactionsContext>({} as ITransactionsContext);
 
 export const TransactionsProvider = ({children}: IChildren) => {
     const { userLogout } = useContext(UsersContext);
 
     const [transactions, setTransactions] = useState<ITransaction[]>([]);
-    const [allTransactions, setAllTransactions] = useState<ITransaction[]>([]);
     const [filteredTransactions, setFilteredTransactions] = useState<ITransaction[]>([]);
     const [approvedTransactionsSubtotal, setApprovedTransactionsSubtotal] = useState<ISubtotal | null>(null);
     const [openModal, setOpenModal] = useState<boolean>(false);
-
-    const retrieveAllTransactions = async () => {
-        const token = localStorage.getItem("@TransactionsM:Token");
-        try {
-            const { data } = await api.get<ITransaction[]>("/transactions", {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            });
-
-            setAllTransactions(data);
-        } catch (error) {
-            toast.warning("Please, login again :)");
-            console.log(error);
-            userLogout();
-        }
-    };
 
     const retrieveUserTransactions = async () => {
         const token = localStorage.getItem("@TransactionsM:Token");
@@ -141,36 +123,11 @@ export const TransactionsProvider = ({children}: IChildren) => {
         setFilteredTransactions(filteredTransactions);
     };
 
-    const uploadFile = async (file: any) => {
-        const token = localStorage.getItem("@TransactionsM:Token");
-        const formData = new FormData();
-        formData.append("file", file);
-        try {
-            await api.post("/transactions/upload", formData, {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                    "Content-Type": "multipart/form-data",
-                    "Content-Length": `${file.size}`
-                }
-            }); 
-            toast.success("Succes! File Uploaded.");
-
-            setTimeout(() => {
-                window.location.reload();
-            }, 2500);
-        } catch (error) {
-            console.log(error);
-        }        
-    };
-
     return (
         <TransactionsContext.Provider value={{
                 transactions,
                 setTransactions,
-                allTransactions,
-                setAllTransactions,
                 retrieveUserTransactions,
-                retrieveAllTransactions,
                 convertTransactionData,
                 filteredTransactions,
                 filterTransactions,
@@ -178,7 +135,6 @@ export const TransactionsProvider = ({children}: IChildren) => {
                 setOpenModal,
                 approvedTransactionsSubtotal,
                 retrieveSubtotalUserApprovedTransactions,
-                uploadFile
             }}>
             {children}
         </TransactionsContext.Provider>

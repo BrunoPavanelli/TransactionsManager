@@ -5,13 +5,13 @@ import { Header } from "../../components/Header/Header";
 import { AdminDashStyled } from "./AdminDashStyled";
 import { UsersContext } from "../../contexts/UsersContext/UsersContext";
 import { TransactionsSection } from "../../components/Main/TransactionsSection/TransactionsSection";
-import { TransactionsContext } from "../../contexts/TransactionsContext/TransactionsContext";
 import { AdminOperationBar } from "../../components/Main/OperationBar/AdminOperationBar";
 import { AdminTransactionsDiv } from "../../components/Main/TransactionsSection/TransactionsDiv/AdminTransactionsDiv";
+import { AdminTransactionsContext } from "../../contexts/TransactionsContext/AdminTransacitionsContext";
 
 export const AdminDash = () => {
     const { userLogout, retrieveUserData } = useContext(UsersContext);
-    const { retrieveAllTransactions } = useContext(TransactionsContext);
+    const { retrieveAllTransactions } = useContext(AdminTransactionsContext);
 
     useEffect(() => {
         retrieveUserData();
