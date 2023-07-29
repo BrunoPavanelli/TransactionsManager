@@ -2,7 +2,7 @@ import { useContext, useEffect } from "react";
 import { FaWallet } from "react-icons/fa";
 
 import { OperationBarDivStyled, OperationBarStyled } from "./OperationBarStyled";
-import { SelectStyled } from "./Select/SelectStyled";
+import { SelectStyled } from "./Filters/SelectStyled";
 import { UsersContext } from "../../../contexts/UsersContext/UsersContext";
 import { AiOutlineSearch } from "react-icons/ai";
 import { SubmitHandler, useForm } from "react-hook-form";

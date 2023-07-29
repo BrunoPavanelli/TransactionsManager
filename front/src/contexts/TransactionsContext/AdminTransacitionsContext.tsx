@@ -39,8 +39,7 @@ export const AdminTransactionsProvider = ({children}: IChildren) => {
             await api.post("/transactions/upload", formData, {
                 headers: {
                     Authorization: `Bearer ${token}`,
-                    "Content-Type": "multipart/form-data",
-                    "Content-Length": `${file.size}`
+                    "Content-Type": "multipart/form-data"
                 }
             }); 
             toast.success("Succes! File Uploaded.");
@@ -49,6 +48,7 @@ export const AdminTransactionsProvider = ({children}: IChildren) => {
                 window.location.reload();
             }, 2500);
         } catch (error) {
+            toast.error("Ooops, some error occurred! Only CSV's files are permitted!");
             console.log(error);
         }        
     };
