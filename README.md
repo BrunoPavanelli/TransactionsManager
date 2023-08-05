@@ -38,9 +38,14 @@
 
 <p>
 	Now you ready to go! </br>
-	You can create users in the front, login with your user and play with the functionalities! </br>
-	If you wanna play directly with the back-end, there is an insomnia workspace file, to test and play with the API!
 </p>
 
+## Aditional information: CSV FILE TO UPLOAD!
+There is an csv file in database back ends folder to upload in Admin Dashboard! </br>
+This cvs file is in link with the users created in the seed file! </br>
+
+## Aditional information: Insomnia
+In back folder there is an insomnia workspace file, to test and play with the API! </br>
+There is some end points not used in front, that you can work in insmonia!
 
 
